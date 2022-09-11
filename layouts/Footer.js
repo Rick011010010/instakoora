@@ -11,11 +11,13 @@ function Footer() {
 
             </div>
 
-            <div>
+            <div className="">
                 <SocialMedia/>
             </div>
         </div>
     )
 }
+
+
 
 export default Footer

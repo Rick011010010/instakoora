@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Header from '../layouts/Header'
+import Navbar from '../layouts/Navbar'
 import Login from '../components/Login'
 import Footer from '../layouts/Footer'
 import About from '../components/About'
@@ -18,7 +18,7 @@ const Home = () => {
 
       <Head>
         <title>InstaKoora</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/LOGO INSTA KOORA.png" />
         <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@1,800&display=swap" rel="stylesheet"></link>
         <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet"></link>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet"></link>
@@ -28,7 +28,7 @@ const Home = () => {
 
 
 
-
+      <Navbar/>
 
       <div className='md:hidden flex justify-center relative' >
         <img src="/BG TELE.png" layout='fill'/>
@@ -49,7 +49,6 @@ const Home = () => {
 
 
 
-      <Header />
 
       <div>
         <HowWork />
@@ -66,7 +65,9 @@ const Home = () => {
       </div>
 
 
-      <Footer className='' />
+      <Footer/>
+
+
 
 
 
