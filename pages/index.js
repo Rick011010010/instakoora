@@ -11,7 +11,7 @@ import AboutUsTele from '../layouts/AboutUsTele'
 const Home = () => {
 
 
-
+  
   return (
     <div className=" relative">
 
