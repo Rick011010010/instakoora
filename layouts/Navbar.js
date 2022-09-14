@@ -12,7 +12,7 @@ function Navbar() {
 
             <div className={``}>
 
-                <Image src="/LOGO INSTA KOORA.png " width={100} height={100} className=" cursor-pointer py-2"/>
+                <img src="/LOGO INSTA KOORA.png " width={100} height={100} className=" cursor-pointer py-2"/>
                 
 
             </div>
