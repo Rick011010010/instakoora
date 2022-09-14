@@ -14,7 +14,7 @@ function home() {
     setMenu(!menu)
   }
 
-  if (status === 'authenticated') {
+  if (session) {
     return (
       <div>
 
