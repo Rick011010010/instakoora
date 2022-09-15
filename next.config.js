@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+ {import('next').NextConfig} 
 module.exports = {
   reactStrictMode: true,
   image:{
@@ -12,5 +12,9 @@ module.exports = {
     domains:["/LOGO INSTA KOORA.png"]
     
   }
+
+  
+
  
 }
+
