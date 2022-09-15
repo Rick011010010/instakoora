@@ -30,7 +30,7 @@ function Login() {
                     </div>
                 </div>
 
-                <div className={register? "  absolute 2xl:top-64 2xl:h-56 lg:h-70   md:flex md:flex-col md:justify-around py-1 w-[100%] bg-gradient-to-r from-gray-300": " hidden"}>
+                <div className={register? " top-72 md:top-96 absolute 2xl:top-64 2xl:h-56 lg:h-70   md:flex md:flex-col md:justify-around py-1 w-[100%] bg-gradient-to-r from-gray-300": " hidden"}>
                     <div className=" flex flex-row justify-around">
                         <label htmlFor="" className="">Enter a Valid Email</label>
                         <input type="text" className=" rounded-2xl py-2 " />
