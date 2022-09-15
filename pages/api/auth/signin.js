@@ -2,17 +2,17 @@ import { getProviders, signIn, useSession, signOut, getSession } from "next-auth
 
 
 export default function SignIn({ providers }) {
-    return (
-        <>
-            {Object.values(providers).map((provider) => (
-                <div key={provider.name}>
-                    <button onClick={() => signIn(provider.id)} className=" p-5 bg-green-200">
-                        Sign in with {provider.name}
-                    </button>
-                </div>
-            ))}
-        </>
-    )
+  return (
+    <>
+      {Object.values(providers).map((provider) => (
+        <div key={provider.name}>
+          <button onClick={() => signIn(provider.id)}>
+            Sign in with {provider.name}
+          </button>
+        </div>
+      ))}
+    </>
+  )
 }
 
 export async function getServerSideProps(context) {
