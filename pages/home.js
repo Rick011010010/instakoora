@@ -1,5 +1,6 @@
 import { getProviders, signIn, useSession, signOut, getSession } from "next-auth/react";
 import React, { useState } from 'react'
+import Sidebar from "../components/Sidebar";
 
 
 
@@ -15,6 +16,7 @@ function home() {
   }
 
   if (session) {
+
     return (
       <div>
 
@@ -23,7 +25,7 @@ function home() {
           <div className='md:flex md:justify-between hidden  '>
 
             <div className='w-[100%] bg-gray-400  p-3 md:flex md:justify-between '>
-              <h1 className='text-black text-4xl p-1'>Profile Page</h1>
+              <h1 className='text-black text-4xl p-1'>InstaKoora</h1>
 
               <ul className='md:absolute md:flex text-black text-xl md:mr-0 top-0 right-0 p-2'>
                 <button className='p-2 flex '><li>Home</li></button>
@@ -33,20 +35,24 @@ function home() {
             </div>
           </div>
 
-          <div className=''>
-            <button className='md:hidden absolute top-0 right-0 p-3 text-black ' onClick={menuHandler} >X</button>
-            <h1 className='text-black text-4xl p-3 md:hidden'>Profile Page</h1>
+          <div className=' bg-gray-400'>
+            <button className='md:hidden absolute  top-0 right-0 p-3 text-black ' onClick={menuHandler} >X</button>
+            <h1 className='text-black text-4xl p-3 md:hidden'>InstaKoora</h1>
 
           </div>
-          <ul className={!menu ? ' md:hidden flex text-black text-xl flex-col border-r  border-r-gray-700 w-[35%] h-56' : 'hidden'}>
-            <button className='p-3 flex '><li>Home</li></button>
-            <button className='p-3 flex '><li>Settings</li></button>
-            <button className='p-3 flex ' onClick={() => signOut()}><li>Signe Out</li></button>
+          <ul className={!menu ? ' md:hidden flex text-black text-xl flex-row border-b justify-center  border-b-gray-700 h-16 w-[90%] mx-[5%] ' : 'hidden'}>
+            <button className='p-2 flex  '><li className=" pt-2">Home</li></button>
+            <button className='p-2 flex '><li className=" pt-2">Settings</li></button>
+            <button className='p-2 flex ' onClick={() => signOut()}><li className=" pt-2">Signe Out</li></button>
           </ul>
         </div>
-        <img src={session.user.image} alt="" className=" rounded-full" />
 
-        <p >Welcome, {session.user.name}</p>
+        <div className="flex flex-col md:flex-row gap-5 ">
+          <Sidebar />
+
+        </div>
+
+
 
 
 
@@ -80,7 +86,7 @@ export const getServerSideProps = async (context) => {
 
     }
 
-  } 
+  }
 
   return {
     props: { session },
