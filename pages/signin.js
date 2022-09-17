@@ -1,6 +1,6 @@
 import { getProviders, signIn, useSession, signOut, getSession } from "next-auth/react";
 import { useState } from "react";
-
+import Router from 'next/router'
 
 
 
@@ -12,49 +12,49 @@ export default function SignIn({ providers }) {
     const [message, setMessage] = useState(null)
 
 
-    // const signInUser = async (e) => {
+    const signInUser = async (e) => {
         
-    //     e.preventDefault()
+        e.preventDefault()
        
-    //     let options = { redirect: false, email, password }
-    //     const res = await signIn("credentials", options)
+        let options = { redirect: false, email, password }
+        const res = await signIn("credentials", options)
        
-    //     setMessage(null)
-    //     if (res?.error) {
-    //         setMessage(res.error)
-    //     }
+        setMessage(null)
+        if (res?.error) {
+            setMessage(res.error)
+        }
         
         
 
 
 
-    // }
+    }
 
-    // const signUpUser = async (e) => {
+    const signUpUser = async (e) => {
 
-    //     e.preventDefault()
-    //     setMessage(null)
+        e.preventDefault()
+        setMessage(null)
 
-    //     const res = await fetch('/api/register', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ email, password }),
-    //     })
-    //     let data = await res.json()
-    //     if (data.message) {
-    //         setMessage(data.message)
-    //     }
-    //     if (data.message == 'Registered successfully') {
-    //         let options = { redirect: false, email, password }
-    //         const res = await signIn("credentials", options)
+        const res = await fetch('/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        })
+        let data = await res.json()
+        if (data.message) {
+            setMessage(data.message)
+        }
+        if (data.message == 'Registered successfully') {
+            let options = { redirect: false, email, password }
+            const res = await signIn("credentials", options)
+            return Router.push("/home")
             
-            
-    //     }
+        }
 
 
-    // }
+    }
 
 
 
@@ -97,9 +97,9 @@ export default function SignIn({ providers }) {
 
 
             {Object.values(providers).map((provider) => {
-                // if (provider.name === "Credentials") {
-                //     return
-                // }
+                if (provider.name === "Credentials") {
+                    return
+                }
                 return (
                     <div key={provider.name}>
                         <button onClick={() => signIn(provider.id)} className=" p-5 bg-green-200">
