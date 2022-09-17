@@ -1,10 +1,15 @@
-module.exports = async (phase, { defaultConfig }) => {
-  /**
-   * @type {import('next').NextConfig}
-   */
-  const nextConfig = {
-    /* config options here */
-  }
-  return nextConfig
+ {import('next').NextConfig} 
+module.exports = {
+  reactStrictMode: true,
+
+  
+  image:{
+    domains:["/BG TELE.png", "/LOGO INSTA KOORA.png", "/app BG"]
+  },
+  
+
+  
+
+ 
 }
 
