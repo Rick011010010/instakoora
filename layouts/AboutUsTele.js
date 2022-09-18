@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {TiThMenu} from 'react-icons/ti'
 
 import { getProviders, signIn, useSession, signOut } from "next-auth/react";
 
@@ -16,7 +17,7 @@ function aboutUsTele() {
     
     <>
     
-    <div className={about?" md:hidden absolute w-[90%] px-5 top-28 flex-col justify-around h-auto 5bg-yellow-100 box-sizing rounded-2xl p-5 bg-yellow-200 ":"hidden"}>
+    <div className={about?" md:hidden absolute w-[90%] px-5 top-28 flex-col justify-around h-auto 5bg-yellow-100 box-sizing rounded-2xl p-5 bg-yellow-200 z-50 ":"hidden"}>
       <h1 className="text-xl font-Merriweather tracking-wide py-7">Are you ready to take your football experience to another level.</h1>
       <p className=" tracking-wide  font-opensans ">join Us and you would be able to create your own team and challenge the other teams near to you, By creating an accound you would be able to send or receiving requests from other players or teams to join them base on your location and your schedule.</p>
 
@@ -25,7 +26,7 @@ function aboutUsTele() {
       
       <button onClick={AboutHandler } className='top-0 right-1 absolute text-2xl'>x</button>
     </div>
-    <button className=' absolute top-0 right-0 bg-green-200 px-2 py-7 rounded-full' onClick={AboutHandler } >About Us</button>
+    <button className=' absolute top-1 right-1 text-[#11D142] z-50 ' onClick={AboutHandler } ><TiThMenu size={30}/></button>
 
     
 

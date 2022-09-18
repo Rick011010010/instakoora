@@ -8,6 +8,7 @@ import HowWork from '../layouts/HowWork'
 import BeforFoter from '../layouts/BeforFoter'
 import AboutUsTele from '../layouts/AboutUsTele'
 
+
 const Home = () => {
 
 
@@ -31,14 +32,14 @@ const Home = () => {
       <Navbar/>
 
       <div className='md:hidden flex justify-center relative' >
-        <img src="/BG TELE.png" layout='fill'/>
+        <Image src="/IN back 2.jpg"  width={1920} height={3450}/>
         <Login />
         <AboutUsTele />
         
       </div>
 
-      <div className='hidden md:flex h-[780px]' >
-        <img src="/ex 12 APP.jpg" width={1920} height={700} layout='fill'/>
+      <div className='hidden md:flex  xl:h-[800px] 2xl:h-[900px] w-screen md:h-[700px]' >
+        <Image src="/bg dark mode.jpg" width={1920} height={700}   />
         <Login />
         <About />
       </div>
@@ -59,7 +60,7 @@ const Home = () => {
 
 
 
-      <div>
+      <div className='w-screen'>
         <BeforFoter />
 
       </div>
