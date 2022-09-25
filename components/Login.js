@@ -87,8 +87,8 @@ function Login() {
 
                 <div className=" flex flex-row justify-around">
                     <label htmlFor="" className=" hidden xl:flex">Enter a Valid Email</label>
-                    <input type="text" className=" rounded-2xl py-2 xl:hidden  " placeholder='Enter a Valid Email' value={email} onChange={e => setEmail(e.target.value)} />
-                    <input type="text" className=" rounded-2xl py-2 hidden xl:flex  " value={email} onChange={e => setEmail(e.target.value)} />
+                    <input type="email" className=" rounded-2xl py-2 xl:hidden  " placeholder='Enter a Valid Email' value={email} onChange={e => setEmail(e.target.value)} />
+                    <input type="email" className=" rounded-2xl py-2 hidden xl:flex  " value={email} onChange={e => setEmail(e.target.value)} />
 
                 </div>
 

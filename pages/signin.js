@@ -8,54 +8,55 @@ import Image from "next/image";
 
 export default function SignIn({ providers }) {
 
-    // const [email, setEmail] = useState('')
-    // const [password, setPassword] = useState('')
-    // const [message, setMessage] = useState(null)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [message, setMessage] = useState(null)
 
 
-    // const signInUser = async (e) => {
+    const signInUser = async (e) => {
 
-    //     e.preventDefault()
+        e.preventDefault()
 
-    //     let options = { redirect: false, email, password }
-    //     const res = await signIn("credentials", options)
+        let options = { redirect: false, email, password }
+        const res = await signIn("credentials", options)
 
-    //     setMessage(null)
-    //     if (res?.error) {
-    //         setMessage(res.error)
-    //     }
+        setMessage(null)
+        if (res?.error) {
+            setMessage(res.error)
+        }
 
-
-
-
-
-    // }
-
-    // const signUpUser = async (e) => {
-
-    //     e.preventDefault()
-    //     setMessage(null)
-
-    //     const res = await fetch('/api/register', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ email, password }),
-    //     })
-    //     let data = await res.json()
-    //     if (data.message) {
-    //         setMessage(data.message)
-    //     }
-    //     if (data.message == 'Registered successfully') {
-    //         let options = { redirect: false, email, password }
-    //         const res = await signIn("credentials", options)
-    //         return Router.push("/home")
-
-    //     }
+       
 
 
-    // }
+
+
+    }
+
+    const signUpUser = async (e) => {
+
+        e.preventDefault()
+        setMessage(null)
+
+        const res = await fetch('/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        })
+        let data = await res.json()
+        if (data.message) {
+            setMessage(data.message)
+        }
+        if (data.message == 'Registered successfully') {
+            let options = { redirect: false, email, password }
+            const res = await signIn("credentials", options)
+            return Router.push("/home")
+
+        }
+
+
+    }
     
 
 
@@ -72,7 +73,7 @@ export default function SignIn({ providers }) {
 
 
 
-            {/* <div className=" top-64 md:top-96 absolute 2xl:top-64  h-56 h-70  flex flex-col justify-around py-1 w-[100%] bg-gradient-to-r from-gray-300" >
+            <div className=" top-64 md:top-96 absolute 2xl:top-0  h-56 h-70  flex flex-col justify-around py-1 w-[40%] mx-[20%] bg-gradient-to-r from-gray-300" >
 
                 <div className=" flex flex-row justify-around">
                     <label htmlFor="" className=" hidden xl:flex">Enter a Valid Email</label>
@@ -88,8 +89,8 @@ export default function SignIn({ providers }) {
                 </div>
                 <div className=" flex flex-row justify-around">
                     <label htmlFor="" className=" pr-6 xl:flex hidden">Repeat Password</label>
-                    <input type="text" className=" rounded-2xl py-2 xl:hidden " placeholder='Repeat Password' id="password" required  value={password} name="password" onChange={e => setPassword(e.target.value)} />
-                    <input type="text" className=" rounded-2xl py-2 hidden xl:flex  " value={password} name="password" id="password" required onChange={e => setPassword(e.target.value)} />
+                    <input type="text" className=" rounded-2xl py-2 xl:hidden " placeholder='Repeat Password' id="password" required  name="password" onChange={e => setPassword(e.target.value)} />
+                    <input type="text" className=" rounded-2xl py-2 hidden xl:flex  "  name="password" id="password" required onChange={e => setPassword(e.target.value)} />
                 </div>
 
                 <p className='text-red-400' >{message}</p>
@@ -100,7 +101,7 @@ export default function SignIn({ providers }) {
 
 
 
-            </div> */}
+            </div>
 
 
             <div className="min-h-screen bg-[#000300] flex justify-center items-center">
@@ -127,7 +128,7 @@ export default function SignIn({ providers }) {
                                     <div>
 
                                         <div key={provider.name} className=''>
-                                            <button onClick={() => signIn(provider.id)} className=" border-2 w-[80%] mx-[10%] border-black rounded-full text-black px-5 md:py-2 py-1  shadow-ms hover:shadow-xl active:scale-90 transition duration-150  ">
+                                            <button onClick={() => signIn(provider.id)} className=" border-2 w-[80%] mx-[10%] my-1 border-black rounded-full text-black px-5 md:py-2 py-1  shadow-ms hover:shadow-xl active:scale-90 transition duration-150  ">
                                                 Sign in with {provider.name}
                                             </button>
                                         </div>

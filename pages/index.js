@@ -2,10 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Navbar from '../layouts/Navbar'
 import Login from '../components/Login'
-import Footer from '../layouts/Footer'
+
 import About from './About'
 import HowWork from '../layouts/HowWork'
-import BeforFoter from '../layouts/BeforFoter'
+import Footer from '../layouts/Footer'
 import AboutUsTele from '../layouts/AboutUsTele'
 
 
@@ -14,7 +14,7 @@ const Home = () => {
 
   
   return (
-    <div className=" relative">
+    <div className=" ">
 
 
       <Head>
@@ -61,12 +61,12 @@ const Home = () => {
 
 
       <div className='w-screen'>
-        <BeforFoter />
+        <Footer />
 
       </div>
 
 
-      <Footer/>
+      
 
 
 
