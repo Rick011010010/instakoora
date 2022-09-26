@@ -16,28 +16,28 @@ export default NextAuth({
   providers: [
 
 
-    CredentialsProvider({
-      // The name to display on the sign in form (e.g. 'Sign in with...')
-      name: 'Credentials',
+    // CredentialsProvider({
+    //   // The name to display on the sign in form (e.g. 'Sign in with...')
+    //   name: 'Credentials',
       
-      credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: {  label: "Password", type: "password" }
-      },
-      async authorize(credentials, req) {
+    //   credentials: {
+    //     username: { label: "Username", type: "text", placeholder: "jsmith" },
+    //     password: {  label: "Password", type: "password" }
+    //   },
+    //   async authorize(credentials, req) {
 
-       const email = credentials.email;
-       const password = credentials.password;
-       const user = await Users.findOne({email})
-       if(!user) {
-        throw new Error("You haven't registered yet")
-       }
-       if(user){
-        return signInUser({password,email})
-       }
+    //    const email = credentials.email;
+    //    const password = credentials.password;
+    //    const user = await Users.findOne({email})
+    //    if(!user) {
+    //     throw new Error("You haven't registered yet")
+    //    }
+    //    if(user){
+    //     return signInUser({password,email})
+    //    }
         
-      }
-    }),
+    //   }
+    // }),
 
 
     GoogleProvider({
@@ -63,14 +63,14 @@ export default NextAuth({
   
 });
 
-const signInUser = async ({password, user})=>{
-  if(!user.password) {
-    throw new Error ("Please enter password")
-  }
-  const isMatch = await bcrypt.compare(password,user.password);
-  if (!isMatch) {
-    throw new Error("password or username not correct")
-  }
-  return user
+// const signInUser = async ({password, user})=>{
+//   if(!user.password) {
+//     throw new Error ("Please enter password")
+//   }
+//   const isMatch = await bcrypt.compare(password,user.password);
+//   if (!isMatch) {
+//     throw new Error("password or username not correct")
+//   }
+//   return user
 
-}
+// }

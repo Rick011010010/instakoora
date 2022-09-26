@@ -65,10 +65,10 @@ export default function MainProfil() {
 
   ///////////// Remove player  //////////
 
-  const remeveHandler = () => {
+  const remeveHandler = (id) => {
 
     players.map((player) =>
-      setPlayers(players.filter((el) => el.id !== player.id))
+      setPlayers(players.filter((el) => el.id !== id.id))
 
     )
 
@@ -106,7 +106,7 @@ export default function MainProfil() {
                       </div >
                       <div className='flex '>
 
-                        <button className='ml-[10%] hover:bg-gray-400 rounded-2xl' onClick={remeveHandler}><RiDeleteBin6Line color='white' /></button>
+                        <button className='ml-[10%] hover:bg-gray-400 rounded-2xl' onClick={()=>remeveHandler(players)}><RiDeleteBin6Line color='white' /></button>
 
 
                       </div>
@@ -257,7 +257,7 @@ export default function MainProfil() {
               </div>
             </div>
           </div>
-          <div className='lex flex-col border text-left rounded-2xl justify-around py-2'>
+          <div className='lex flex-col border-2 text-left rounded-2xl justify-around py-2 hover:shadow-xl hover:shadow-gray-500 '>
             <div>
               <div className='bg-[#00d8ff] inline-flex p-2 rounded-full'>
                 icon

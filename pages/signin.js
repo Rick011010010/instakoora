@@ -13,50 +13,50 @@ export default function SignIn({ providers }) {
     const [message, setMessage] = useState(null)
 
 
-    const signInUser = async (e) => {
+    // const signInUser = async (e) => {
 
-        e.preventDefault()
+    //     e.preventDefault()
 
-        let options = { redirect: false, email, password }
-        const res = await signIn("credentials", options)
+    //     let options = { redirect: false, email, password }
+    //     const res = await signIn("credentials", options)
 
-        setMessage(null)
-        if (res?.error) {
-            setMessage(res.error)
-        }
+    //     setMessage(null)
+    //     if (res?.error) {
+    //         setMessage(res.error)
+    //     }
 
        
 
 
 
 
-    }
+    // }
 
-    const signUpUser = async (e) => {
+    // const signUpUser = async (e) => {
 
-        e.preventDefault()
-        setMessage(null)
+    //     e.preventDefault()
+    //     setMessage(null)
 
-        const res = await fetch('/api/register', {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-        })
-        let data = await res.json()
-        if (data.message) {
-            setMessage(data.message)
-        }
-        if (data.message == 'Registered successfully') {
-            let options = { redirect: false, email, password }
-            const res = await signIn("credentials", options)
-            return Router.push("/home")
+    //     const res = await fetch('/api/register', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-type': 'application/json',
+    //         },
+    //         body: JSON.stringify({ email, password }),
+    //     })
+    //     let data = await res.json()
+    //     if (data.message) {
+    //         setMessage(data.message)
+    //     }
+    //     if (data.message == 'Registered successfully') {
+    //         let options = { redirect: false, email, password }
+    //         const res = await signIn("credentials", options)
+    //         return Router.push("/home")
 
-        }
+    //     }
 
 
-    }
+    // }
     
 
 
@@ -73,7 +73,7 @@ export default function SignIn({ providers }) {
 
 
 
-            <div className=" top-64 md:top-96 absolute 2xl:top-0  h-56 h-70  flex flex-col justify-around py-1 w-[40%] mx-[20%] bg-gradient-to-r from-gray-300" >
+            {/* <div className=" top-64 md:top-96 absolute 2xl:top-0  h-56 h-70  flex flex-col justify-around py-1 w-[40%] mx-[20%] bg-gradient-to-r from-gray-300" >
 
                 <div className=" flex flex-row justify-around">
                     <label htmlFor="" className=" hidden xl:flex">Enter a Valid Email</label>
@@ -101,7 +101,7 @@ export default function SignIn({ providers }) {
 
 
 
-            </div>
+            </div> */}
 
 
             <div className="min-h-screen bg-[#000300] flex justify-center items-center">
