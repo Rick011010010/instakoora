@@ -4,9 +4,9 @@ import GoogleProvider from "next-auth/providers/google";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "./lib/mongodb";
 import FacebookProvider from "next-auth/providers/facebook";
-import CredentialsProvider from "next-auth/providers/credentials"
+// import CredentialsProvider from "next-auth/providers/credentials"
 import connectDB from "./lib/connectDB";
-import  Users from '../../models/useModel'
+// import  Users from '../../models/useModel'
 import { signIn } from "next-auth/react";
 import bcrypt from 'bcrypt'
 connectDB();
