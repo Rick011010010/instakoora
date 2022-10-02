@@ -9,7 +9,7 @@ import connectDB from "./lib/connectDB";
 // import  Users from '../../models/useModel'
 import { signIn } from "next-auth/react";
 import bcrypt from 'bcrypt'
-connectDB();
+
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -55,7 +55,7 @@ export default NextAuth({
   
  
   pages: {
-    
+    signIn:"/signin",
     signOut : "/",
   },
   secret:"secret",

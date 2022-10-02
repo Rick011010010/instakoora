@@ -1,12 +1,18 @@
 import Card from "./card"
 import { GiSoccerKick } from 'react-icons/gi'
 import { IoIosAddCircleOutline } from 'react-icons/io'
-import { RiDeleteBin6Line } from 'react-icons/ri'
-import { useState } from 'react'
+import { RiDeleteBin6Line, RiTeamFill } from 'react-icons/ri'
+import { BsFillTelephoneFill } from 'react-icons/bs'
+import { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from "uuid"
+import { getProviders, signIn, useSession, signOut, getSession } from "next-auth/react";
+import {useSSRPlayerState, handlePlayerState } from '../atoms/playerAtom'
+import { useRecoilState } from "recoil";
 
 
-export default function MainProfil() {
+export default function MainProfil({players}) {
+
+  const { data: session, status } = useSession();
 
   const [modal, setModal] = useState(false)
   const modalHandler = () => {
@@ -28,24 +34,33 @@ export default function MainProfil() {
     setInputAge(e.target.value)
   }
 
+  const [inputPhone, setInputPhone] = useState('')
 
-  const [players, setPlayers] = useState([])
+  const inputPhoneHandler = (e) => {
+    console.log(e.target.value)
+    setInputPhone(e.target.value)
+  }
+
+
+
+
+  const [realplayers, setRealPlayers] = useState([])
+  const [handlePost, setHandlePost] = useRecoilState(handlePlayerState);
 
   ////////////  save players ////////////
 
   const playersHandler = (e) => {
 
 
-
-
-
     if (inputName && inputAge) {
       e.preventDefault();
       setPlayers([
-        ...players, { Name: inputName, Age: inputAge, complete: false, id: uuidv4(), edit: false }
+        ...players, { Name: inputName, Age: inputAge, phone: inputPhone, complete: false, id: uuidv4(), edit: false }
       ])
       modalHandler(false)
       setInputName("");
+      setInputAge("");
+      setInputPhone("");
 
     }
 
@@ -77,41 +92,140 @@ export default function MainProfil() {
 
   }
 
+  ///////////// back end : add player //////////
+
+  const addPlayerDb = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("/api/players", {
+      method: "Post",
+      body: JSON.stringify({
+        inputName: inputName,
+        inputAge: inputAge,
+        inputPhone: inputPhone,
+        username: session.user.name,
+        email: session.user.email,
+        userImg: session.user.image,
+        userId: session.user.id,
+        createdAt: new Date().toString(),
+
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+
+    })
+    const responseData = await response.json();
+
+
+    console.log(responseData);
+    setModal(false)
+    setInputName("");
+    setInputAge("");
+    setInputPhone("");
+    setUseSSRPlayerState(true);  
 
 
 
+
+
+
+  }
+
+
+  ///////// use effect handleplayer ssr /////////
+
+  const [useSSRPlayers, setUseSSRPlayerState] = useState(false);
+
+  useEffect(() => {
+    const fetchPLayers = async () => {
+      const response = await fetch("/api/players", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const responseData = await response.json();
+      setRealPlayers(responseData);
+      
+      setUseSSRPlayerState(true);  
+    };
+
+    fetchPLayers();
+  }, [modal]);
+
+  console.log(handlePost)
 
 
 
   return (
-    <div className=" flex flex-col justify-between bg-[#000300] text-white ">
-      <div className=" w-[100%] xl:h-[700px] bg-[#000300] rounded-2xl  p-3 h-[1300px] pt-5 hover:shadow-xl    ">
+    <div className=" flex flex-col justify-between bg-[#000300] text-white   ">
+      <div className=" w-[100%]  xl:h-[700px] bg-[#000300] rounded-2xl  p-3 h-[1300px] pt-5 hover:shadow-xl    ">
 
         <h3 className="text-center my-5">Create a Team</h3>
         <div className=" w-full h-96 grid sm:grid-cols-1 xl:grid-cols-3 gap-4">
           <div className='flex flex-col border text-left rounded-2xl py-2 '>
             <div className=" h-96 flex flex-col gap-3 px-2 overflow-auto   ">
               <div className='bg-[#00d8ff] inline-flex p-2  rounded-full w-12 '>
-                <GiSoccerKick size={30} />
+                <RiTeamFill size={30} />
               </div>
               <button className='flex border px-20 py-0 border-dashed justify-center w-[80%] mx-[10%]  ' onClick={modalHandler}><IoIosAddCircleOutline size={30} className='md:' />Add Player</button>
 
               <div className="text-center">
-                <ul className="">
-
-                  {players.map((players) => (
-                    <div className='bg-gradient-to-r from-[#00d8ff] font-opensans text-2xl  my-1 rounded-xl flex justify-between px-5 py-2 md:py-2 border-2 border-slate-700 '>
-                      <div>
-                        <li className='flex justify-around  '><h1 className="pr-20"><p className=" text-black">Name:</p>{players.Name}</h1><h1><p className=" text-red-300">Age:</p>{players.Age}</h1> </li>
-                      </div >
-                      <div className='flex '>
-
-                        <button className='ml-[10%] hover:bg-gray-400 rounded-2xl' onClick={()=>remeveHandler(players)}><RiDeleteBin6Line color='white' /></button>
+                <ul className=" flex flex-col gap-3">
+                  {useSSRPlayers?
+                  realplayers.map((player) => (
 
 
+                    <div className="relative">
+                      {/* <!-- box-1 --> */}
+                      <div className="px-2">
+                        <div className="flex h-8 w-full rounded-t-lg border-b-2 border-slate-300 bg-slate-100 pl-[90px] shadow-lg">
+                          <small className="my-auto flex  items-center text-xs font-light tracking-tight text-slate-700"><BsFillTelephoneFill className=" mx-1" />{player.inputPhone}</small>
+                        </div>
+                      </div>
+                      {/* <!-- box-2 --> */}
+                      <div className="flex justify-between pr-2 h-12 w-full rounded-lg bg-white pl-[98px] shadow-xl">
+                        <small className="my-auto  font-medium text-slate-700 text-xl">{player.inputName}</small>
+                        <p className=" text-black pt-2 text-xl ">Age:{player.inputAge}</p>
+                        <button className='ml-[10%] hover:bg-gray-400 rounded-2xl ' onClick={() => remeveHandler(players)}><RiDeleteBin6Line color='black' size={20} /></button>
+                      </div>
+                      {/* <!-- circle --> */}
+                      <div className="absolute top-2 left-6 h-16 w-16 rounded-full border-2 border-white shadow-md">
+                        <img className="rounded-full  w-full h-full " src="player2.webp" alt="" />
                       </div>
                     </div>
-                  ))}
+
+                    
+                  ))
+                  :players.map((player) => (
+
+
+                    <div className="relative">
+                      {/* <!-- box-1 --> */}
+                      <div className="px-2">
+                        <div className="flex h-8 w-full rounded-t-lg border-b-2 border-slate-300 bg-slate-100 pl-[90px] shadow-lg">
+                          <small className="my-auto flex  items-center text-xs font-light tracking-tight text-slate-700"><BsFillTelephoneFill className=" mx-1" />{player.inputPhone}</small>
+                        </div>
+                      </div>
+                      {/* <!-- box-2 --> */}
+                      <div className="flex justify-between pr-2 h-12 w-full rounded-lg bg-white pl-[98px] shadow-xl">
+                        <small className="my-auto  font-medium text-slate-700 text-xl">{player.inputName}</small>
+                        <p className=" text-black pt-2 text-xl ">Age:{player.inputAge}</p>
+                        <button className='ml-[10%] hover:bg-gray-400 rounded-2xl ' onClick={() => remeveHandler(players)}><RiDeleteBin6Line color='black' size={20} /></button>
+                      </div>
+                      {/* <!-- circle --> */}
+                      <div className="absolute top-2 left-6 h-16 w-16 rounded-full border-2 border-white shadow-md">
+                        <img className="rounded-full  w-full h-full " src="player2.webp" alt="" />
+                      </div>
+                    </div>
+
+                    
+                  ))
+                  }
+
+
+                  
 
 
 
@@ -132,35 +246,35 @@ export default function MainProfil() {
 
           <div className='lex flex-col border text-left rounded-2xl justify-around py-2 bg-white hover:shadow-xl  shadow-ms shadow-white'>
             <div>
-              
-              <div class="flex items-center justify-center p-12 ">
-                
-                <div class="mx-auto w-full max-w-[550px]">
-                  <form action="https://formbold.com/s/FORM_ID" method="POST">
-                    <div class="-mx-3 flex ">
-                      
-                        <div class="mb-5">
-                          <label
-                            for="team Name"
-                            class="mb-3 block text-base font-medium text-[#07074D]"
-                          >
-                            The Name of the Team
-                          </label>
-                          <input
-                            type="text"
-                            name="team Name"
-                            id="fName"
-                            placeholder="enter a Name"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                          />
-                        </div>
-                      
-                      
+
+              <div className="flex items-center justify-center p-12 ">
+
+                <div className="mx-auto w-full max-w-[550px]">
+                  <form method="POST">
+                    <div className="-mx-3 flex ">
+
+                      <div className="mb-5">
+                        <label
+                          for="team Name"
+                          className="mb-3 block text-base font-medium text-[#07074D]"
+                        >
+                          The Name of the Team
+                        </label>
+                        <input
+                          type="text"
+                          name="team Name"
+                          id="fName"
+                          placeholder="enter a Name"
+                          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                        />
+                      </div>
+
+
                     </div>
-                    <div class="mb-5">
+                    <div className="mb-5">
                       <label
                         for="guest"
-                        class="mb-3 block text-base font-medium text-[#07074D]"
+                        className="mb-3 block text-base font-medium text-[#07074D]"
                       >
                         How many player your team have?
                       </label>
@@ -170,16 +284,16 @@ export default function MainProfil() {
                         id="guest"
                         placeholder="5"
                         min="0"
-                        class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                        className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                     </div>
 
-                    <div class="-mx-3 flex flex-wrap">
-                      <div class="w-full px-3 sm:w-1/2">
-                        <div class="mb-5">
+                    <div className="-mx-3 flex flex-wrap">
+                      <div className="w-full px-3 sm:w-1/2">
+                        <div className="mb-5">
                           <label
                             for="date"
-                            class="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-[#07074D]"
                           >
                             Date
                           </label>
@@ -187,15 +301,15 @@ export default function MainProfil() {
                             type="date"
                             name="date"
                             id="date"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                           />
                         </div>
                       </div>
-                      <div class="w-full px-3 sm:w-1/2">
-                        <div class="mb-5">
+                      <div className="w-full px-3 sm:w-1/2">
+                        <div className="mb-5">
                           <label
                             for="time"
-                            class="mb-3 block text-base font-medium text-[#07074D]"
+                            className="mb-3 block text-base font-medium text-[#07074D]"
                           >
                             Time
                           </label>
@@ -203,51 +317,30 @@ export default function MainProfil() {
                             type="time"
                             name="time"
                             id="time"
-                            class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                           />
                         </div>
                       </div>
                     </div>
 
-                    <div class="mb-5">
-                      <label class="mb-3 block text-base font-medium text-[#07074D]">
-                        Are you coming to the event?
+                    <div className="mb-5">
+                      <label className="mb-3 block text-base font-medium text-[#07074D]">
+                        Team Group Age
                       </label>
-                      <div class="flex items-center space-x-6">
-                        <div class="flex items-center">
-                          <input
-                            type="radio"
-                            name="radio1"
-                            id="radioButton1"
-                            class="h-5 w-5"
-                          />
-                          <label
-                            for="radioButton1"
-                            class="pl-3 text-base font-medium text-[#07074D]"
-                          >
-                            Yes
-                          </label>
-                        </div>
-                        <div class="flex items-center">
-                          <input
-                            type="radio"
-                            name="radio1"
-                            id="radioButton2"
-                            class="h-5 w-5"
-                          />
-                          <label
-                            for="radioButton2"
-                            class="pl-3 text-base font-medium text-[#07074D]"
-                          >
-                            No
-                          </label>
-                        </div>
+                      <div >
+                        <select name="" id="" className="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+                          <option selected>Choose a Group Age</option>
+                          <option value="SE">Senior (21 years old and +)</option>
+                          <option value="JU">Junior (18, 19, 20 years old)</option>
+                          <option value="CA">Cadet (16,17 years old)</option>
+                          <option value="MI">Minime (14 years old and -)</option>
+                        </select>
                       </div>
                     </div>
 
                     <div>
                       <button
-                        class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                        className="hover:shadow-form rounded-md bg-[#00d8ff] py-3 px-8 text-center text-base font-semibold text-white outline-none"
                       >
                         Submit
                       </button>
@@ -257,7 +350,7 @@ export default function MainProfil() {
               </div>
             </div>
           </div>
-          <div className='lex flex-col border-2 text-left rounded-2xl justify-around py-2 hover:shadow-xl hover:shadow-gray-500 '>
+          <div className='lex flex-col border-2 text-left rounded-2xl justify-around py-2  '>
             <div>
               <div className='bg-[#00d8ff] inline-flex p-2 rounded-full'>
                 icon
@@ -285,8 +378,8 @@ export default function MainProfil() {
 
       {/* ////////////////// modal Player ////////////////////*/}
 
-      <div className={modal ? " absolute mx-[23%] py-8 text-black  " : "hidden"}>
-        <div className="w-96 mx-auto bg-white rounded-2xl shadow h-[450px] my-3 relative ">
+      <div className={modal ? " absolute mx-[23%] md:my-[15%] md:mx-[1%] py-8 text-black  " : "hidden"}>
+        <div className="w-96 mx-auto bg-white  rounded-2xl shadow h-[450px] my-3 relative ">
           <button onClick={() => setModal(!modal)} className='top-0 right-2 absolute text-3xl text-black'>x</button>
 
           <div className="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500">Player Information
@@ -299,22 +392,29 @@ export default function MainProfil() {
 
                 <label className="block text-grey-darker text-sm font-bold mb-2">Player Name:</label>
                 <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
-                  name="Player Name" id="Player Name" placeholder="Enter Player Name" onChange={inputNameHandler} required />
+                  name="Player Name" value={inputName} id="Player Name" placeholder="Enter Player Name" onChange={inputNameHandler} required />
 
               </div>
 
 
               <div className="mb-4">
                 <label className="block text-grey-darker text-sm font-bold mb-2">Player Age</label>
-                <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
-                  name="Player Age" id="Player Age" placeholder="Enter Player Age" onChange={inputAgeHandler} required />
+                <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="number" maxLength="2"
+                  name="Player Age" id="Player Age" value={inputAge} placeholder="Enter Player Age" onChange={inputAgeHandler} required />
+
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-grey-darker text-sm font-bold mb-2">Phone Number</label>
+                <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="number"
+                  name="Phone Number" id="Player Age" value={inputPhone} placeholder="Enter Phone Number" required onChange={inputPhoneHandler} />
 
               </div>
 
 
               <div className="">
                 <button
-                  className="mb-2 mx-10 rounded-full py-1 px-24 bg-gradient-to-r from-green-400 to-blue-500 " onClick={playersHandler}>
+                  className="mb-2 mx-10 rounded-full py-1 px-24 bg-gradient-to-r from-green-400 to-blue-500 " onClick={addPlayerDb}>
                   Save
                 </button>
               </div>
@@ -350,3 +450,16 @@ export default function MainProfil() {
     </div>
   )
 }
+
+
+
+
+
+  // // Get posts on SSR
+  // const { db } = await connectToDatabase();
+  // const posts = await db
+  //   .collection("posts")
+  //   .find()
+  //   .sort({ timestamp: -1 })
+  //   .toArray();
+
