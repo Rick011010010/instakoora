@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
 export const handlePlayerState = atom({
-  key: "handleTeamState",
+  key: "handlePlayerState",
   default: false,
 });
 
@@ -11,6 +11,6 @@ export const getPlayerState = atom({
 });
 
 export const useSSRPlayerState = atom({
-  key: "useSSRTeamState ",
+  key: "useSSRPlayerState",
   default: true,
 });
