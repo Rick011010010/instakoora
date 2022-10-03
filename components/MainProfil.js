@@ -14,6 +14,7 @@ import Player from "./Player"
 
 export default function MainProfil({ players }) {
 
+  console.log(players,"hhhhhhhhhhhhhhhhhhhhhhh")
   const { data: session, status } = useSession();
 
   const [modal, setModal] = useState(false)
@@ -47,7 +48,7 @@ export default function MainProfil({ players }) {
 
 
   const [realplayers, setRealPlayers] = useState([])
-  const [handlePost, setHandlePost] = useRecoilState(handlePlayerState);
+  const [handlePlayer, setHandlePlayer] = useRecoilState(handlePlayerState);
 
   ////////////  save players ////////////
 
@@ -142,7 +143,7 @@ export default function MainProfil({ players }) {
 
   useEffect(() => {
     const fetchPLayers = async () => {
-      const response = await fetch("/api/players", {
+      const response = await fetch("/api/players?user="+session.user.email, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -154,7 +155,9 @@ export default function MainProfil({ players }) {
     };
 
     fetchPLayers();
-  }, [modal]);
+  }, [modal, handlePlayer]);
+
+  
 
   
 
@@ -182,12 +185,12 @@ export default function MainProfil({ players }) {
                   {useSSRPlayers ?
                     realplayers.map((player) => (
 
-                      <Player player={player} key={player._id} setUseSSRPlayerState={setUseSSRPlayerState} setModal={setModal}  />
+                      <Player player={player} key={player._id}   />
 
                     ))
                     : players.map((player) => (
 
-                      <Player player={player} key={player._id} setUseSSRPlayerState={setUseSSRPlayerState} setModal={setModal} />
+                      <Player player={player} key={player._id}   />
 
                     ))
                   }

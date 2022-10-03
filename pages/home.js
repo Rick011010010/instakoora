@@ -105,11 +105,15 @@ export const getServerSideProps = async (context) => {
 
   }
 
+
+  
+
+
   // Get players on SSR
   const { db } = await connectToDatabase();
   const players = await db
     .collection("players")
-    .find()
+    .find({email:session.user.email})
     .sort({ timestamp: -1 })
     .toArray();
 

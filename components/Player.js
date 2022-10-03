@@ -3,8 +3,12 @@ import { IoIosAddCircleOutline } from 'react-icons/io'
 import { RiDeleteBin6Line, RiTeamFill } from 'react-icons/ri'
 import { BsFillTelephoneFill } from 'react-icons/bs'
 import { useState, useEffect } from 'react'
+import { useSSRPlayerState, handlePlayerState } from '../atoms/playerAtom'
+import { useRecoilState } from "recoil";
 
-function player({player, setUseSSRPlayerState, setModal}) {
+function player({player}) {
+
+  const [handlePlayer, setHandlePlayer] = useRecoilState(handlePlayerState);
 
   const deletePost = async () => {
 
@@ -14,9 +18,14 @@ function player({player, setUseSSRPlayerState, setModal}) {
     });
 
 
-    setUseSSRPlayerState(true)
-    setModal(false)
+    setHandlePlayer(true)
+
+    console.log(handlePlayer)
+    
   };
+
+
+  
 
 
 

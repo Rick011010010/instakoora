@@ -6,7 +6,7 @@ export const handlePlayerState = atom({
 });
 
 export const getPlayerState = atom({
-  key: "getTeamState",
+  key: "getPlayerStat",
   default: {},
 });
 

@@ -6,15 +6,16 @@ import { Timestamp } from "mongodb";
 
 export default async function handler(req, res) {
   
-  const { method, body } = req;
+  const { method, body,query } = req;
 
   const { db } = await connectToDatabase();
 
   if (method === "GET") {
+    const user=query.user
     try {
       const players = await db
         .collection("players")
-        .find()
+        .find({email:user})
         .sort({ timestamp: -1 })
         .toArray();
       res.status(200).json(players);
