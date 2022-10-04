@@ -25,7 +25,7 @@ function home({players}) {
   if (session) {
 
     return (
-      <div className=" bg-[#000300] ">
+      <div className=" bg-[#000300]  ">
 
         <div className=" bg-[#000300] ">
 

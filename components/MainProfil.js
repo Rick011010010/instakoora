@@ -14,7 +14,7 @@ import Player from "./Player"
 
 export default function MainProfil({ players }) {
 
-  console.log(players,"hhhhhhhhhhhhhhhhhhhhhhh")
+  console.log(players, "hhhhhhhhhhhhhhhhhhhhhhh")
   const { data: session, status } = useSession();
 
   const [modal, setModal] = useState(false)
@@ -143,7 +143,7 @@ export default function MainProfil({ players }) {
 
   useEffect(() => {
     const fetchPLayers = async () => {
-      const response = await fetch("/api/players?user="+session.user.email, {
+      const response = await fetch("/api/players?user=" + session.user.email, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -157,9 +157,9 @@ export default function MainProfil({ players }) {
     fetchPLayers();
   }, [modal, handlePlayer]);
 
-  
 
-  
+
+
 
   //////////// remove player DB /////////
 
@@ -174,7 +174,9 @@ export default function MainProfil({ players }) {
         <h3 className="text-center my-5">Create a Team</h3>
         <div className=" w-full h-96 grid sm:grid-cols-1 xl:grid-cols-3 gap-4">
           <div className='flex flex-col border text-left rounded-2xl py-2 '>
-            <div className=" h-96 flex flex-col gap-3 px-2 overflow-auto   ">
+            {/* /// ADD Player */}
+
+            <div className=" relative h-full w-full flex flex-col gap-3  overflow-auto px-2  ">
               <div className='bg-[#00d8ff] inline-flex p-2  rounded-full w-12 '>
                 <RiTeamFill size={30} />
               </div>
@@ -185,12 +187,12 @@ export default function MainProfil({ players }) {
                   {useSSRPlayers ?
                     realplayers.map((player) => (
 
-                      <Player player={player} key={player._id}   />
+                      <Player player={player} key={player._id} />
 
                     ))
                     : players.map((player) => (
 
-                      <Player player={player} key={player._id}   />
+                      <Player player={player} key={player._id} />
 
                     ))
                   }
@@ -206,7 +208,57 @@ export default function MainProfil({ players }) {
               </div>
 
 
+              <div className={modal ? " absolute  text-black  " : "hidden"}>
+                <div className=" mx-[5%] bg-white 2xl:w-[400px] w-[330px]     rounded-2xl shadow h-full my-10 relative ">
+                  <button onClick={() => setModal(!modal)} className='top-0 right-2 absolute text-3xl text-black'>x</button>
+
+                  <div className="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500">Player Information
+                  </div>
+
+                  <form name="Player Information" id="Player Information" action="">
+                    <div className="py-10 px-8">
+
+                      <div className="mb-4">
+
+                        <label className="block text-grey-darker text-sm font-bold mb-2">Player Name:</label>
+                        <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                          name="Player Name" value={inputName} id="Player Name" placeholder="Enter Player Name" onChange={inputNameHandler} required />
+
+                      </div>
+
+
+                      <div className="mb-4">
+                        <label className="block text-grey-darker text-sm font-bold mb-2">Player Age</label>
+                        <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="number" maxLength="2"
+                          name="Player Age" id="Player Age" value={inputAge} placeholder="Enter Player Age" onChange={inputAgeHandler} required />
+
+                      </div>
+
+                      <div className="mb-4">
+                        <label className="block text-grey-darker text-sm font-bold mb-2">Phone Number</label>
+                        <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="number"
+                          name="Phone Number" id="Player Age" value={inputPhone} placeholder="Enter Phone Number" required onChange={inputPhoneHandler} />
+
+                      </div>
+
+
+                      <div className="">
+                        <button
+                          className="mb-2 mx-10 rounded-full py-1 px-24 bg-gradient-to-r from-green-400 to-blue-500 " onClick={addPlayerDb}>
+                          Save
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+
+                </div>
+
+              </div>
             </div>
+
+            {/* /// ADD Player */}
+
+
           </div>
 
 
@@ -260,7 +312,7 @@ export default function MainProfil({ players }) {
                         className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                     </div>
-
+                    <h1 className=" text-[#07074D] text-base font-medium py-1 ">Available To play On:</h1>
                     <div className="-mx-3 flex flex-wrap">
                       <div className="w-full px-3 sm:w-1/2">
                         <div className="mb-5">
@@ -350,53 +402,6 @@ export default function MainProfil({ players }) {
 
 
       {/* ////////////////// modal Player ////////////////////*/}
-
-      <div className={modal ? " absolute mx-[23%] md:my-[15%] md:mx-[1%] py-8 text-black  " : "hidden"}>
-        <div className="w-96 mx-auto bg-white  rounded-2xl shadow h-[450px] my-3 relative ">
-          <button onClick={() => setModal(!modal)} className='top-0 right-2 absolute text-3xl text-black'>x</button>
-
-          <div className="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500">Player Information
-          </div>
-
-          <form name="Player Information" id="Player Information" action="">
-            <div className="py-10 px-8">
-
-              <div className="mb-4">
-
-                <label className="block text-grey-darker text-sm font-bold mb-2">Player Name:</label>
-                <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
-                  name="Player Name" value={inputName} id="Player Name" placeholder="Enter Player Name" onChange={inputNameHandler} required />
-
-              </div>
-
-
-              <div className="mb-4">
-                <label className="block text-grey-darker text-sm font-bold mb-2">Player Age</label>
-                <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="number" maxLength="2"
-                  name="Player Age" id="Player Age" value={inputAge} placeholder="Enter Player Age" onChange={inputAgeHandler} required />
-
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-grey-darker text-sm font-bold mb-2">Phone Number</label>
-                <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="number"
-                  name="Phone Number" id="Player Age" value={inputPhone} placeholder="Enter Phone Number" required onChange={inputPhoneHandler} />
-
-              </div>
-
-
-              <div className="">
-                <button
-                  className="mb-2 mx-10 rounded-full py-1 px-24 bg-gradient-to-r from-green-400 to-blue-500 " onClick={addPlayerDb}>
-                  Save
-                </button>
-              </div>
-            </div>
-          </form>
-
-        </div>
-
-      </div>
 
 
       {/* <div>
