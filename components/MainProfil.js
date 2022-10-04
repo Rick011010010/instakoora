@@ -168,95 +168,98 @@ export default function MainProfil({ players }) {
 
 
   return (
-    <div className=" flex flex-col justify-between bg-[#000300] text-white   ">
-      <div className=" w-[100%]  xl:h-[700px] bg-[#000300] rounded-2xl  p-3 h-[1300px] pt-5 hover:shadow-xl    ">
+    <div className=" md:flex md:flex-col gap-3 justify-between  bg-[#000300] text-white   ">
+      <div className=" w-[100%]  xl:h-[700px] bg-[#000300] rounded-2xl  p-3 h-[1900px] pt-5 hover:shadow-xl   ">
 
         <h3 className="text-center my-5">Create a Team</h3>
         <div className=" w-full h-96 grid sm:grid-cols-1 xl:grid-cols-3 gap-4">
-          <div className='flex flex-col border text-left rounded-2xl py-2 '>
+          <div className='flex flex-col border text-left rounded-2xl py-2 relative      '>
             {/* /// ADD Player */}
+            <div className=" ">
+              <div className=" h-[600px] w-full flex flex-col gap-3   px-2 overflow-auto      ">
+                <div className='bg-[#00d8ff] inline-flex p-2  rounded-full w-12 '>
+                  <RiTeamFill size={30} />
+                </div>
+                <button className='flex border px-20 py-0 border-dashed justify-center w-[80%] mx-[10%]  ' onClick={modalHandler}><IoIosAddCircleOutline size={30} className='md:' />Add Player</button>
 
-            <div className=" relative h-full w-full flex flex-col gap-3  overflow-auto px-2  ">
-              <div className='bg-[#00d8ff] inline-flex p-2  rounded-full w-12 '>
-                <RiTeamFill size={30} />
-              </div>
-              <button className='flex border px-20 py-0 border-dashed justify-center w-[80%] mx-[10%]  ' onClick={modalHandler}><IoIosAddCircleOutline size={30} className='md:' />Add Player</button>
+                <div className="text-center">
+                  <ul className=" flex flex-col gap-3">
+                    {useSSRPlayers ?
+                      realplayers.map((player) => (
 
-              <div className="text-center">
-                <ul className=" flex flex-col gap-3">
-                  {useSSRPlayers ?
-                    realplayers.map((player) => (
+                        <Player player={player} key={player._id} />
 
-                      <Player player={player} key={player._id} />
+                      ))
+                      : players.map((player) => (
 
-                    ))
-                    : players.map((player) => (
+                        <Player player={player} key={player._id} />
 
-                      <Player player={player} key={player._id} />
-
-                    ))
-                  }
-
-
+                      ))
+                    }
 
 
 
 
 
-                </ul>
-
-              </div>
 
 
-              <div className={modal ? " absolute  text-black  " : "hidden"}>
-                <div className=" mx-[5%] bg-white 2xl:w-[400px] w-[330px]     rounded-2xl shadow h-full my-10 relative ">
-                  <button onClick={() => setModal(!modal)} className='top-0 right-2 absolute text-3xl text-black'>x</button>
-
-                  <div className="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500">Player Information
-                  </div>
-
-                  <form name="Player Information" id="Player Information" action="">
-                    <div className="py-10 px-8">
-
-                      <div className="mb-4">
-
-                        <label className="block text-grey-darker text-sm font-bold mb-2">Player Name:</label>
-                        <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
-                          name="Player Name" value={inputName} id="Player Name" placeholder="Enter Player Name" onChange={inputNameHandler} required />
-
-                      </div>
-
-
-                      <div className="mb-4">
-                        <label className="block text-grey-darker text-sm font-bold mb-2">Player Age</label>
-                        <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="number" maxLength="2"
-                          name="Player Age" id="Player Age" value={inputAge} placeholder="Enter Player Age" onChange={inputAgeHandler} required />
-
-                      </div>
-
-                      <div className="mb-4">
-                        <label className="block text-grey-darker text-sm font-bold mb-2">Phone Number</label>
-                        <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="number"
-                          name="Phone Number" id="Player Age" value={inputPhone} placeholder="Enter Phone Number" required onChange={inputPhoneHandler} />
-
-                      </div>
-
-
-                      <div className="">
-                        <button
-                          className="mb-2 mx-10 rounded-full py-1 px-24 bg-gradient-to-r from-green-400 to-blue-500 " onClick={addPlayerDb}>
-                          Save
-                        </button>
-                      </div>
-                    </div>
-                  </form>
+                  </ul>
 
                 </div>
+
+
 
               </div>
             </div>
 
             {/* /// ADD Player */}
+
+            <div className={modal ? " absolute w-full 2xl:-mx-6 xl:-mx-2 lg:-mx-10 md:-mx-8 -mx-7 -my-12 h-full text-black  " : "hidden"}>
+              <div className=" mx-[5%] bg-white w-full h-full text-center rounded-2xl shadow  my-10 relative ">
+                <button onClick={() => setModal(!modal)} className='top-0 right-2 absolute text-3xl text-black'>x</button>
+
+                <div className="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500">Player Information
+                </div>
+
+                <form name="Player Information" id="Player Information" action="">
+                  <div className="py-10 px-8">
+
+                    <div className="mb-4">
+
+                      <label className="block text-grey-darker text-sm font-bold mb-2">Player Name:</label>
+                      <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                        name="Player Name" value={inputName} id="Player Name" placeholder="Enter Player Name" onChange={inputNameHandler} required />
+
+                    </div>
+
+
+                    <div className="mb-4">
+                      <label className="block text-grey-darker text-sm font-bold mb-2">Player Age</label>
+                      <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="number" maxLength="2"
+                        name="Player Age" id="Player Age" value={inputAge} placeholder="Enter Player Age" onChange={inputAgeHandler} required />
+
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="block text-grey-darker text-sm font-bold mb-2">Phone Number</label>
+                      <input className=" border rounded w-full py-2 px-3 text-grey-darker" type="number"
+                        name="Phone Number" id="Player Age" value={inputPhone} placeholder="Enter Phone Number" required onChange={inputPhoneHandler} />
+
+                    </div>
+
+
+                    <div className="">
+                      <button
+                        className="mb-2 mx-10 rounded-full py-1 px-24 bg-gradient-to-r from-green-400 to-blue-500 " onClick={addPlayerDb}>
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+
+            </div>
 
 
           </div>
@@ -391,7 +394,7 @@ export default function MainProfil({ players }) {
       </div>
 
 
-      <div className=" w-[100%] h-80  border text-left rounded-2xl py-5 px-8 my-5">
+      <div className=" w-[100%] h-80  border text-left rounded-2xl py-5 px-8 my-60 md:my-5">
         <h3 className="text-center">Map Position</h3>
       </div>
 
