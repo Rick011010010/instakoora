@@ -8,6 +8,7 @@ import { AiFillHome } from 'react-icons/ai'
 import { AiFillSetting } from 'react-icons/ai'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { TiThMenu } from 'react-icons/ti'
+import Navbar from "../components/Navbar";
 
 
 
@@ -25,11 +26,14 @@ function home({players}) {
   if (session) {
 
     return (
-      <div className=" bg-[#000300]  ">
+      <div className=" bg-[#000300]   ">
 
-        <div className=" bg-[#000300] ">
+        <div className=" bg-[#000300] z-50 ">
 
-          <div className='md:flex md:justify-between hidden  '>
+
+          <Navbar/>
+
+          {/* <div className='md:flex md:justify-between hidden  '>
 
             <div className='w-[100%] bg-[#000300]  p-3 md:flex md:justify-between '>
               <h1 className='text-[#00df9a] text-4xl p-1'>InstaKoora</h1>
@@ -51,7 +55,7 @@ function home({players}) {
             <button className=' flex text-[#00df9a] '><AiFillHome size={25} /><li className=" ">Home</li></button>
             <button className=' flex text-[#00df9a] '><AiFillSetting size={25} /><li className=" ">Settings</li></button>
             <button className=' flex  text-[#00df9a]' onClick={() => signOut()}><BsFillPersonFill size={25} /><li className="">Signe Out</li></button>
-          </ul>
+          </ul> */}
         </div>
 
 

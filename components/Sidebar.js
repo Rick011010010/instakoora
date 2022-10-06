@@ -7,7 +7,7 @@ function Sidebar() {
     const { data: session } = useSession();
 
     return (
-        <div className="space-y-2   p-2 my-5 ">
+        <div className="space-y-2   p-2 my-5 z-0 ">
             {/* Top */}
             <div className="rounded-3xl overflow-hidden shadow-xl   my-3 bg-[#00d8ff]">
                 <img src="https://i.imgur.com/dYcYQ7E.png" className="w-full" />
@@ -54,7 +54,7 @@ function Sidebar() {
 
 
             {/* Bottom */}
-            <div className="hidden md:flex bg-gray-200 text-black/70 rounded-lg overflow-hidden flex-col space-y-2 pt-2.5 h-60 sticky top-20 border border-gray-300 ">
+            <div className="hidden md:flex bg-gray-200 text-black/70 rounded-lg overflow-hidden flex-col space-y-2 pt-2.5 h-96 sticky top-20 border border-gray-300 ">
                 <p className=" text-center text-black"> xx xxx xxx </p>
             </div>
         </div>

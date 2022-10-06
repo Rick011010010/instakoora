@@ -168,8 +168,8 @@ export default function MainProfil({ players }) {
 
 
   return (
-    <div className=" md:flex md:flex-col gap-3 justify-between  bg-[#000300] text-white   ">
-      <div className=" w-[100%]  xl:h-[700px] bg-[#000300] rounded-2xl  p-3 h-[1900px] pt-5 hover:shadow-xl   ">
+    <div className=" md:flex md:flex-col md:gap-3 justify-between  bg-[#000300] text-white my-8 z-0   ">
+      <div className=" w-[100%]  xl:h-[700px] bg-[#000300] rounded-2xl  p-3 h-[1900px] pt-5  ">
 
         <h3 className="text-center my-5">Create a Team</h3>
         <div className=" w-full h-96 grid sm:grid-cols-1 xl:grid-cols-3 gap-4">
@@ -378,7 +378,7 @@ export default function MainProfil({ players }) {
               </div>
             </div>
           </div>
-          <div className='lex flex-col border-2 text-left rounded-2xl justify-around py-2  '>
+          <div className='lex flex-col border-2 text-left rounded-2xl justify-around py-2 h-[618px]  '>
             <div>
               <div className='bg-[#00d8ff] inline-flex p-2 rounded-full'>
                 icon
