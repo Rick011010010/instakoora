@@ -9,13 +9,17 @@ import { getProviders, signIn, useSession, signOut, getSession } from "next-auth
 import { useSSRPlayerState, handlePlayerState } from '../atoms/playerAtom'
 import { useRecoilState } from "recoil";
 import Player from "./Player"
+import Team from "./Team"
 
 
 
 export default function MainProfil({ players }) {
 
-  console.log(players, "hhhhhhhhhhhhhhhhhhhhhhh")
+  
   const { data: session, status } = useSession();
+
+
+  /////////// PLayer States //////////////
 
   const [modal, setModal] = useState(false)
   const modalHandler = () => {
@@ -25,7 +29,7 @@ export default function MainProfil({ players }) {
   const [inputName, setInputName] = useState('')
 
   const inputNameHandler = (e) => {
-    console.log(e.target.value)
+    
     setInputName(e.target.value)
   }
 
@@ -33,22 +37,59 @@ export default function MainProfil({ players }) {
   const [inputAge, setInputAge] = useState('')
 
   const inputAgeHandler = (e) => {
-    console.log(e.target.value)
+    
     setInputAge(e.target.value)
   }
 
   const [inputPhone, setInputPhone] = useState('')
 
   const inputPhoneHandler = (e) => {
-    console.log(e.target.value)
+    
     setInputPhone(e.target.value)
   }
 
 
-
-
   const [realplayers, setRealPlayers] = useState([])
   const [handlePlayer, setHandlePlayer] = useRecoilState(handlePlayerState);
+
+  //////// TEAM STATES //////
+
+  const [teamName, setTeamName] = useState('')
+
+  const teamNameHandler = (e) => {
+    setTeamName(e.target.value)
+  }
+
+  const [playersNumber, setPlayersNumber] = useState('')
+  const playersNumberHAndler = (e) => {
+    setPlayersNumber(e.target.value)
+  }
+
+  const [teamPhone, setTeamPhone] = useState('')
+  const teamPhoneHAndler = (e) => {
+    setTeamPhone(e.target.value)
+  }
+
+  const [date, setDate] = useState('')
+  const dateHAndler = (e) => {
+    console.log(e.target.value)
+    setDate(e.target.value)
+  }
+
+  const [hour, setHour] = useState('')
+  const hourHAndler = (e) => {
+    console.log(e.target.value)
+    setHour(e.target.value)
+  }
+
+  const [teamupdate,setTeamupdate] = useState(false)
+  const [myteam, setMyteam] = useState([])
+  const [teams, setTeams] = useState([])
+
+
+
+
+
 
   ////////////  save players ////////////
 
@@ -161,7 +202,72 @@ export default function MainProfil({ players }) {
 
 
 
-  //////////// remove player DB /////////
+  ///////////// back end : add team //////////
+
+  const addTeamDb = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch("/api/teams", {
+      method: "Post",
+      body: JSON.stringify({
+        teamName: teamName,
+        playersNumber: playersNumber,
+        teamPhone: teamPhone,
+        date:date,
+        hour:hour,
+        username: session.user.name,
+        email: session.user.email,
+        userImg: session.user.image,
+        userId: session.user.id,
+        createdAt: new Date().toString(),
+
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+
+    })
+    const responseData = await response.json();
+
+
+    console.log(responseData);
+    setTeamupdate(!teamupdate)
+
+  }
+
+
+  useEffect(() => {
+    const fetchteam = async () => {
+      const response = await fetch("/api/teams?user=" + session.user.email, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const responseData = await response.json();
+      setMyteam(responseData);
+
+      
+    };
+
+    fetchteam();
+  }, [teamupdate]);
+
+  useEffect(() => {
+    const fetchteam = async () => {
+      const response = await fetch("/api/allteams",  {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const responseData = await response.json();
+      setTeams(responseData);
+
+      
+    };
+
+    fetchteam();
+  }, [teamupdate]);
 
 
 
@@ -275,7 +381,7 @@ export default function MainProfil({ players }) {
 
 
 
-              <div className="flex items-center justify-center p-12 ">
+              <div className="flex items-center justify-center p-6 pt-0 pb-0">
 
                 <div className="mx-auto w-full max-w-[550px]">
                   <form method="POST">
@@ -294,6 +400,8 @@ export default function MainProfil({ players }) {
                           id="fName"
                           placeholder="enter a Name"
                           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                          value={teamName}
+                          onChange={teamNameHandler}
                         />
                       </div>
 
@@ -313,6 +421,24 @@ export default function MainProfil({ players }) {
                         placeholder="5"
                         min="0"
                         className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                        value={playersNumber}
+                        onChange={playersNumberHAndler}
+                      />
+                      <label
+                        for="guest"
+                        className="mb-3 block text-base font-medium text-[#07074D]"
+                      >
+                        Phone Number of the Team
+                      </label>
+                      <input
+                        type="number"
+                        name="guest"
+                        id="guest"
+                        placeholder="5"
+                        min="0"
+                        className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                        value={teamPhone}
+                        onChange={teamPhoneHAndler}
                       />
                     </div>
                     <h1 className=" text-[#07074D] text-base font-medium py-1 ">Available To play On:</h1>
@@ -330,6 +456,8 @@ export default function MainProfil({ players }) {
                             name="date"
                             id="date"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            value={date}
+                            onChange={dateHAndler}
                           />
                         </div>
                       </div>
@@ -346,6 +474,8 @@ export default function MainProfil({ players }) {
                             name="time"
                             id="time"
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                            value={hour}
+                            onChange={hourHAndler}
                           />
                         </div>
                       </div>
@@ -369,6 +499,7 @@ export default function MainProfil({ players }) {
                     <div>
                       <button
                         className="hover:shadow-form rounded-md bg-[#00d8ff] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                        onClick={addTeamDb}
                       >
                         Submit
                       </button>
@@ -379,15 +510,7 @@ export default function MainProfil({ players }) {
             </div>
           </div>
           <div className='lex flex-col border-2 text-left rounded-2xl justify-around py-2 h-[618px]  '>
-            <div>
-              <div className='bg-[#00d8ff] inline-flex p-2 rounded-full'>
-                icon
-              </div>
-              <h3 className='text-xl font-bold py-4'>headling</h3>
-              <p>
-                text
-              </p>
-            </div>
+            {myteam.map((team)=>(<Team team={team}/>))}
           </div>
         </div>
 
@@ -401,6 +524,7 @@ export default function MainProfil({ players }) {
 
       <div className=" w-[100%] h-80 bg-[#07dd47]  rounded-2xl my-2">
         <h3 className="text-center ">Find a team</h3>
+        {teams.map((team)=>(<Team team={team}/>))}
       </div>
 
 
