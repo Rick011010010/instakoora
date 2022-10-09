@@ -13,9 +13,10 @@ import Team from "./Team"
 
 
 
+
 export default function MainProfil({ players }) {
 
-  
+
   const { data: session, status } = useSession();
 
 
@@ -29,7 +30,7 @@ export default function MainProfil({ players }) {
   const [inputName, setInputName] = useState('')
 
   const inputNameHandler = (e) => {
-    
+
     setInputName(e.target.value)
   }
 
@@ -37,14 +38,14 @@ export default function MainProfil({ players }) {
   const [inputAge, setInputAge] = useState('')
 
   const inputAgeHandler = (e) => {
-    
+
     setInputAge(e.target.value)
   }
 
   const [inputPhone, setInputPhone] = useState('')
 
   const inputPhoneHandler = (e) => {
-    
+
     setInputPhone(e.target.value)
   }
 
@@ -82,7 +83,7 @@ export default function MainProfil({ players }) {
     setHour(e.target.value)
   }
 
-  const [teamupdate,setTeamupdate] = useState(false)
+  const [teamupdate, setTeamupdate] = useState(false)
   const [myteam, setMyteam] = useState([])
   const [teams, setTeams] = useState([])
 
@@ -213,8 +214,8 @@ export default function MainProfil({ players }) {
         teamName: teamName,
         playersNumber: playersNumber,
         teamPhone: teamPhone,
-        date:date,
-        hour:hour,
+        date: date,
+        hour: hour,
         username: session.user.name,
         email: session.user.email,
         userImg: session.user.image,
@@ -247,7 +248,7 @@ export default function MainProfil({ players }) {
       const responseData = await response.json();
       setMyteam(responseData);
 
-      
+
     };
 
     fetchteam();
@@ -255,7 +256,7 @@ export default function MainProfil({ players }) {
 
   useEffect(() => {
     const fetchteam = async () => {
-      const response = await fetch("/api/allteams",  {
+      const response = await fetch("/api/allteams", {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       });
@@ -263,7 +264,7 @@ export default function MainProfil({ players }) {
       const responseData = await response.json();
       setTeams(responseData);
 
-      
+
     };
 
     fetchteam();
@@ -509,8 +510,9 @@ export default function MainProfil({ players }) {
               </div>
             </div>
           </div>
-          <div className='lex flex-col border-2 text-left rounded-2xl justify-around py-2 h-[618px]  '>
-            {myteam.map((team)=>(<Team team={team}/>))}
+          <div className='flex flex-col text-left rounded-2xl justify-around py-2 h-[618px] relative overflow-hidden  '>
+
+            {myteam.map((team) => (<Team team={team} />))}
           </div>
         </div>
 
@@ -522,9 +524,11 @@ export default function MainProfil({ players }) {
       </div>
 
 
-      <div className=" w-[100%] h-80 bg-[#07dd47]  rounded-2xl my-2">
+      <div className=" w-[100%] border-2 h-[690px]  rounded-2xl my-2 ">
         <h3 className="text-center ">Find a team</h3>
-        {teams.map((team)=>(<Team team={team}/>))}
+        <div className=" flex  flex-row gap-2 relative h-80">
+          {teams.map((team) => (<Team team={team} />))}
+        </div>
       </div>
 
 
