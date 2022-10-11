@@ -23,7 +23,7 @@ function home({players}) {
     setMenu(!menu)
   }
 
-  if (session) {
+  if (  session) {
 
     return (
       <div className=" bg-[#000300]   ">

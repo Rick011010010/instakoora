@@ -10,10 +10,10 @@ export default async function handler(req, res) {
 
   const { db } = await connectToDatabase();
 
-  if (method === "DELETE") {
+  if (method === "PUT") {
     try {
-      await db.collection("teams").deleteOne({ _id: new ObjectId(id) });
-      res.status(200).json({ message: "your card team has been deleted!!" });
+      await db.collection("teams").fieldToUpdate({ _id: new ObjectId(id) });
+      res.status(200).json({ message: "your team card has been updated!!" });
     } catch (error) {
       res.status(500).json(error);
     }

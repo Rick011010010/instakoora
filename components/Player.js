@@ -10,7 +10,7 @@ function player({player}) {
 
   const [handlePlayer, setHandlePlayer] = useRecoilState(handlePlayerState);
 
-  const deletePost = async () => {
+  const deletePlayer = async () => {
 
     const response = await fetch(`/api/players/${player._id}`, {
       method: "DELETE",
@@ -22,7 +22,7 @@ function player({player}) {
 
     console.log(handlePlayer)
     
-  };
+  }
 
 
   
@@ -44,7 +44,7 @@ function player({player}) {
                         <div className="flex justify-between pr-2 h-12 w-full rounded-lg bg-white pl-[98px] shadow-xl">
                           <small className="my-auto  font-medium text-slate-700 text-xl">{player.inputName}</small>
                           <p className=" text-black pt-2 text-xl ">Age:{player.inputAge}</p>
-                          <button className='ml-[10%] hover:bg-gray-400 rounded-2xl ' onClick={deletePost}><RiDeleteBin6Line color='black' size={20} /></button>
+                          <button className='ml-[10%] hover:bg-gray-400 rounded-2xl ' onClick={deletePlayer}><RiDeleteBin6Line color='black' size={20} /></button>
                         </div>
                         {/* <!-- circle --> */}
                         <div className="absolute top-2 left-6 h-16 w-16 rounded-full border-2 border-white shadow-md">

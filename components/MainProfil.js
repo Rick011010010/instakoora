@@ -10,6 +10,12 @@ import { useSSRPlayerState, handlePlayerState } from '../atoms/playerAtom'
 import { useRecoilState } from "recoil";
 import Player from "./Player"
 import Team from "./Team"
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper'
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 
 
@@ -82,6 +88,13 @@ export default function MainProfil({ players }) {
     console.log(e.target.value)
     setHour(e.target.value)
   }
+  const [groupAge, setGroupAge] = useState('')
+  const groupAgeHAndle = (e) => {
+    console.log(e.target.value,"target")
+    
+    setGroupAge(e.target.value)
+  }
+  console.log(groupAge,"state")       
 
   const [teamupdate, setTeamupdate] = useState(false)
   const [myteam, setMyteam] = useState([])
@@ -209,6 +222,7 @@ export default function MainProfil({ players }) {
     e.preventDefault();
 
     const response = await fetch("/api/teams", {
+
       method: "Post",
       body: JSON.stringify({
         teamName: teamName,
@@ -216,6 +230,7 @@ export default function MainProfil({ players }) {
         teamPhone: teamPhone,
         date: date,
         hour: hour,
+        groupAge:groupAge,
         username: session.user.name,
         email: session.user.email,
         userImg: session.user.image,
@@ -237,6 +252,7 @@ export default function MainProfil({ players }) {
 
   }
 
+  //////// Get My Team //////////
 
   useEffect(() => {
     const fetchteam = async () => {
@@ -253,6 +269,8 @@ export default function MainProfil({ players }) {
 
     fetchteam();
   }, [teamupdate]);
+
+  ////// Get all Teams cards ////////
 
   useEffect(() => {
     const fetchteam = async () => {
@@ -271,7 +289,7 @@ export default function MainProfil({ players }) {
   }, [teamupdate]);
 
 
-
+  console.log(myteam, "ggggggggggggggggggggggggggggggggggggggg ")
 
 
   return (
@@ -403,6 +421,7 @@ export default function MainProfil({ players }) {
                           className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                           value={teamName}
                           onChange={teamNameHandler}
+                          required
                         />
                       </div>
 
@@ -424,6 +443,7 @@ export default function MainProfil({ players }) {
                         className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         value={playersNumber}
                         onChange={playersNumberHAndler}
+                        required
                       />
                       <label
                         for="guest"
@@ -440,6 +460,7 @@ export default function MainProfil({ players }) {
                         className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         value={teamPhone}
                         onChange={teamPhoneHAndler}
+                        required
                       />
                     </div>
                     <h1 className=" text-[#07074D] text-base font-medium py-1 ">Available To play On:</h1>
@@ -459,6 +480,7 @@ export default function MainProfil({ players }) {
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={date}
                             onChange={dateHAndler}
+                            required
                           />
                         </div>
                       </div>
@@ -477,6 +499,7 @@ export default function MainProfil({ players }) {
                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                             value={hour}
                             onChange={hourHAndler}
+                            required
                           />
                         </div>
                       </div>
@@ -487,12 +510,12 @@ export default function MainProfil({ players }) {
                         Team Group Age
                       </label>
                       <div >
-                        <select name="" id="" className="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
+                        <select name="" id="" value={groupAge} onChange={groupAgeHAndle} className="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
                           <option selected>Choose a Group Age</option>
-                          <option value="SE">Senior (21 years old and +)</option>
-                          <option value="JU">Junior (18, 19, 20 years old)</option>
-                          <option value="CA">Cadet (16,17 years old)</option>
-                          <option value="MI">Minime (14 years old and -)</option>
+                          <option value="Senior (21 years old and +)" >Senior (21 years old and +)</option>
+                          <option value="Junior (18, 19, 20 years old" >Junior (18, 19, 20 years old)</option>
+                          <option value="Cadet (16,17 years old)">Cadet (16,17 years old)</option>
+                          <option value="Minime (14 years old and -)" >Minime (14 years old and -)</option>
                         </select>
                       </div>
                     </div>
@@ -510,7 +533,7 @@ export default function MainProfil({ players }) {
               </div>
             </div>
           </div>
-          <div className='flex flex-col text-left rounded-2xl justify-around py-2 h-[618px] relative overflow-hidden  '>
+          <div className='flex flex-col text-left rounded-2xl justify-around py-2 h-[618px] relative   '>
 
             {myteam.map((team) => (<Team team={team} />))}
           </div>
@@ -524,10 +547,29 @@ export default function MainProfil({ players }) {
       </div>
 
 
-      <div className=" w-[100%] border-2 h-[690px]  rounded-2xl my-2 ">
+      <div className=" w-[100%] border-2 h-[690px]  rounded-2xl my-2 xl- relative   ">
         <h3 className="text-center ">Find a team</h3>
-        <div className=" flex  flex-row gap-2 relative h-80">
-          {teams.map((team) => (<Team team={team} />))}
+        <div className="    ">
+          <Swiper
+            spaceBetween={20}
+            centeredSlides={true}
+            // autoplay={{
+            //   delay: 2500,
+            //   disableOnInteraction: false,
+            // }}
+            // pagination={{
+            // clickable: true,
+            // }}
+            slidesPerView={'auto'}
+            // scrollbar={{ draggable: true }}
+            navigation={true}
+            // max-h-52 xl:max-h-[500px]
+            modules={[Autoplay, Pagination, Navigation]}
+            className="  h-[690px] w-[100%]  rounded-2xl my-2 relative  "
+          >
+            {teams.map((team) => (<SwiperSlide><Team team={team} /></SwiperSlide>))}
+
+          </Swiper>
         </div>
       </div>
 
