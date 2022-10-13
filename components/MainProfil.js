@@ -90,16 +90,21 @@ export default function MainProfil({ players }) {
   }
   const [groupAge, setGroupAge] = useState('')
   const groupAgeHAndle = (e) => {
-    console.log(e.target.value,"target")
-    
+    console.log(e.target.value, "target")
+
     setGroupAge(e.target.value)
   }
-  console.log(groupAge,"state")       
+  console.log(groupAge, "state")
 
   const [teamupdate, setTeamupdate] = useState(false)
   const [myteam, setMyteam] = useState([])
   const [teams, setTeams] = useState([])
+  const [photoUrl, setPhotoUrl] = useState("");
 
+
+  const photoUrlHandler = (e) => {
+    setPhotoUrl(e.target.value)
+  }
 
 
 
@@ -230,7 +235,8 @@ export default function MainProfil({ players }) {
         teamPhone: teamPhone,
         date: date,
         hour: hour,
-        groupAge:groupAge,
+        groupAge: groupAge,
+        photoUrl: photoUrl,
         username: session.user.name,
         email: session.user.email,
         userImg: session.user.image,
@@ -294,7 +300,7 @@ export default function MainProfil({ players }) {
 
   return (
     <div className=" md:flex md:flex-col md:gap-3 justify-between  bg-[#000300] text-white my-8 z-0   ">
-      <div className=" w-[100%]  xl:h-[700px] bg-[#000300] rounded-2xl  p-3 h-[1900px] pt-5  ">
+      <div className=" w-[100%]   xl:h-[750px] bg-[#000300] rounded-2xl  p-3 h-[2050px] pt-5 box-border ">
 
         <h3 className="text-center my-5">Create a Team</h3>
         <div className=" w-full h-96 grid sm:grid-cols-1 xl:grid-cols-3 gap-4">
@@ -395,7 +401,7 @@ export default function MainProfil({ players }) {
 
 
 
-          <div className='lex flex-col border text-left rounded-2xl justify-around py-2 bg-white hover:shadow-xl  shadow-ms shadow-white'>
+          <div className='flex flex-col border text-left rounded-2xl justify-around py-2 bg-white hover:shadow-xl  shadow-ms shadow-white'>
             <div>
 
 
@@ -512,17 +518,24 @@ export default function MainProfil({ players }) {
                       <div >
                         <select name="" id="" value={groupAge} onChange={groupAgeHAndle} className="  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ">
                           <option selected>Choose a Group Age</option>
-                          <option value="Senior (21 years old and +)" >Senior (21 years old and +)</option>
-                          <option value="Junior (18, 19, 20 years old" >Junior (18, 19, 20 years old)</option>
-                          <option value="Cadet (16,17 years old)">Cadet (16,17 years old)</option>
-                          <option value="Minime (14 years old and -)" >Minime (14 years old and -)</option>
+                          <option value="Senior (21 yo)" >Senior (21 years old and +)</option>
+                          <option value="Junior (18 yo)" >Junior (18, 19, 20 years old)</option>
+                          <option value="Cadet (16,17 yo)">Cadet (16,17 years old)</option>
+                          <option value="Minime (max: 14 yo)" >Minime (14 years old and -)</option>
                         </select>
                       </div>
                     </div>
+                    <input
+                      type="text"
+                      placeholder="Add a photo Team URL "
+                      className="w-full rounded-md border border-[#e0e0e0]  bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                      value={photoUrl}
+                      onChange={photoUrlHandler}
+                    />
 
                     <div>
                       <button
-                        className="hover:shadow-form rounded-md bg-[#00d8ff] py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                        className="hover:shadow-form rounded-md bg-[#00E1C8] py-4 px-8 text-center text-base font-semibold text-white outline-none"
                         onClick={addTeamDb}
                       >
                         Submit
@@ -551,7 +564,7 @@ export default function MainProfil({ players }) {
         <h3 className="text-center ">Find a team</h3>
         <div className="    ">
           <Swiper
-            spaceBetween={20}
+
             centeredSlides={true}
             // autoplay={{
             //   delay: 2500,
@@ -560,7 +573,32 @@ export default function MainProfil({ players }) {
             // pagination={{
             // clickable: true,
             // }}
-            slidesPerView={'auto'}
+            breakpoints={{
+              // when window width is >= 640px
+              640: {
+                width: 640,
+                slidesPerView: 'auto',
+                spaceBetween: 20,
+
+              },
+              // when window width is >= 768px
+              768: {
+                width: 768,
+                slidesPerView: 'auto',
+                spaceBetween: 10,
+              },
+              1024: {
+                width: 1024,
+                slidesPerView: 'auto',
+                spaceBetween: 0,
+              },
+              1536: {
+                width: 1280,
+                slidesPerView: 3,
+                spaceBetween: 200,
+              },
+            }}
+
             // scrollbar={{ draggable: true }}
             navigation={true}
             // max-h-52 xl:max-h-[500px]

@@ -1,7 +1,8 @@
 import { getProviders, signIn, useSession, signOut, getSession } from "next-auth/react";
 import { useState, useEffect } from 'react'
 import { AiFillHome } from 'react-icons/ai'
-import { AiFillSetting } from 'react-icons/ai'
+import { HiUserGroup } from 'react-icons/hi'
+import { GoLocation } from 'react-icons/go'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { TiThMenu } from 'react-icons/ti'
 
@@ -32,8 +33,8 @@ function Navbar() {
                                 <div class="flex space-x-4">
                                     {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
                                     <a href="#" class="bg-gray-900 text-[#2afc5f]  px-3 py-2 rounded-md text-lg font-medium flex"><AiFillHome size={25} />Home</a>
-                                    <a href="#" class="text-[#2afc5f] hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium flex">Team</a>
-                                    <a href="#" class="text-[#2afc5f] hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium flex">Position</a>
+                                    <a href="#" class="text-[#2afc5f] hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium flex"><HiUserGroup size={25} />Teams</a>
+                                    <a href="#" class="text-[#2afc5f] hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium flex"><GoLocation size={25}/>Position</a>
                                     <a href="#" class="text-[#2afc5f] hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium flex">Calendar</a>
                                 </div>
                             </div>
