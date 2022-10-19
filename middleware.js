@@ -16,18 +16,18 @@ export async function middleware(req) {
     if (!session) return NextResponse.redirect(`${origin}/`);
   }
 
-  if (pathname === '/') {
-    const session = await getToken({
-      req,
-      secret: process.env.JWT_SECRET,
-      secureCookie: process.env.NODE_ENV === 'production',
-    });
-    // if(pathname==='/' && session){
-    //   return NextResponse.redirect(`${origin}/frontpage`)
-    // }
+//   if (pathname === '/') {
+//     const session = await getToken({
+//       req,
+//       secret: process.env.JWT_SECRET,
+//       secureCookie: process.env.NODE_ENV === 'production',
+//     });
+//     // if(pathname==='/' && session){
+//     //   return NextResponse.redirect(`${origin}/frontpage`)
+//     // }
  
  
-    if (session) return NextResponse.redirect(`${origin}/home`);
-  }
+//     if (session) return NextResponse.redirect(`${origin}/home`);
+//   }
 
 }
