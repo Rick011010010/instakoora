@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import { useSSRPlayerState, handlePlayerState } from '../atoms/playerAtom'
 import { useRecoilState } from "recoil";
 
-function player({player}) {
+function player({player,setPlayerDelete, playerDelete}) {
 
   const [handlePlayer, setHandlePlayer] = useRecoilState(handlePlayerState);
 
@@ -21,6 +21,7 @@ function player({player}) {
     setHandlePlayer(true)
 
     console.log(handlePlayer)
+    setPlayerDelete=(!playerDelete)
     
   }
 

@@ -16,6 +16,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import axios from 'axios';
+import MapLocation from './MapLocation'
+
 
 
 
@@ -97,6 +100,7 @@ export default function MainProfil({ players }) {
   console.log(groupAge, "state")
 
   const [teamupdate, setTeamupdate] = useState(false)
+  const [playerDelete, setPlayerDelete] = useState(false)
   const [myteam, setMyteam] = useState([])
   const [teams, setTeams] = useState([])
   const [photoUrl, setPhotoUrl] = useState("");
@@ -215,7 +219,7 @@ export default function MainProfil({ players }) {
     };
 
     fetchPLayers();
-  }, [modal, handlePlayer]);
+  }, [modal, playerDelete]);
 
 
 
@@ -237,6 +241,7 @@ export default function MainProfil({ players }) {
         hour: hour,
         groupAge: groupAge,
         photoUrl: photoUrl,
+        URL: URL,
         username: session.user.name,
         email: session.user.email,
         userImg: session.user.image,
@@ -297,6 +302,19 @@ export default function MainProfil({ players }) {
 
   console.log(myteam, "ggggggggggggggggggggggggggggggggggggggg ")
 
+  const [URL, setUrl] = useState('')
+
+
+  const uploadImagePdf = (e) => {
+    const form = new FormData();
+    form.append("file", e);
+    form.append("upload_preset", "my-uploads");
+    console.log(e,"255255415255545");
+    axios.post("https://api.cloudinary.com/v1_1/dzdse786p/image/upload", form)
+      .then((result) => setUrl(result.data.secure_url))
+    addTeamDb()
+  };
+
 
   return (
     <div className=" md:flex md:flex-col md:gap-3 justify-between  bg-[#000300] text-white my-8 z-0   ">
@@ -318,7 +336,7 @@ export default function MainProfil({ players }) {
                     {useSSRPlayers ?
                       realplayers.map((player) => (
 
-                        <Player player={player} key={player._id} />
+                        <Player player={player} key={player._id} playerDelete={playerDelete} setPlayerDelete={setPlayerDelete} />
 
                       ))
                       : players.map((player) => (
@@ -525,13 +543,25 @@ export default function MainProfil({ players }) {
                         </select>
                       </div>
                     </div>
-                    <input
-                      type="text"
-                      placeholder="Add a photo Team URL "
-                      className="w-full rounded-md border border-[#e0e0e0]  bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                      value={photoUrl}
-                      onChange={photoUrlHandler}
-                    />
+                    <div className=" flex flex-row border ">
+                      <input
+                        type="text"
+                        placeholder="Add a photo Team URL "
+                        className="w-full rounded-md border-none border-[#e0e0e0]  bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                        value={photoUrl}
+                        onChange={photoUrlHandler}
+                      />
+                      <div className=" w-32 flex flex-col justify-center items-center ">
+                       
+                        <input
+                          onChange={(e) => uploadImagePdf(e.target.files[0])}
+                          id="dropzone-file"
+                          type="file"
+                          className=" rounded-full w-28 border-2 "
+                          multiple
+                          
+                        /></div>
+                    </div>
 
                     <div>
                       <button
@@ -548,15 +578,16 @@ export default function MainProfil({ players }) {
           </div>
           <div className='flex flex-col text-left rounded-2xl justify-around py-2 h-[618px] relative   '>
 
-            {myteam.map((team) => (<Team team={team} />))}
+            {myteam.map((team) => (<Team team={team} setTeamupdate={setTeamupdate} key={team._id} teamupdate={teamupdate} />))}
           </div>
         </div>
 
       </div>
 
 
-      <div className=" w-[100%] h-80  border text-left rounded-2xl py-5 px-8 my-60 md:my-5">
+      <div className=" w-[100%] h-80  border text-left rounded-2xl py-5 px-8 my-60 md:my-5 relative">
         <h3 className="text-center">Map Position</h3>
+        <MapLocation/>
       </div>
 
 

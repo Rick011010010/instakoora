@@ -6,19 +6,28 @@ import {  BiTime  } from 'react-icons/bi'
 
 import Image from 'next/image'
 
-function Team({ team }) {
+function Team({ team,teamupdate,setTeamupdate
+ }) {
 
   const updateMyTeam = async () => {
 
     const response = await fetch(`/api/teams/${team._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
+      body:JSON.stringify(team)
+    },
+    
+    ).then((result) => {
+      result.json().then((resp) => {
+        console.warn(resp)
+        
+      })
     });
 
 
-    setHandlePlayer(true)
+    setTeamupdate(!teamupdate)
 
-    console.log(handlePlayer)
+    
 
   }
 
@@ -31,7 +40,7 @@ function Team({ team }) {
       <img src="/cardfifa123.png"
         className=' w-[500px] h-[650px] z-50 ' />
 
-      <img src={team.photoUrl} alt="" className=' absolute self-center top-24 w-[435px] left-4 h-[300px] rounded-lg shadow-2xl shadow-[#00E1C8] border-[#00E1C8] border-8 ' />
+      <img src={team.photoUrl || team.URL } alt="" className=' absolute self-center top-24 w-[435px] left-4 h-[300px] rounded-lg shadow-2xl shadow-[#00E1C8] border-[#00E1C8] border-8 ' />
 
 
       <div className='absolute w-full top-16 text-center -px-2'>
@@ -118,6 +127,9 @@ function Team({ team }) {
           </div>
         </div>
       </div>
+
+
+      <button onClick={()=>updateMyTeam()}>update</button>
 
 
 
