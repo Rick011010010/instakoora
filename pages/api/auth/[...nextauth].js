@@ -58,8 +58,12 @@ export default NextAuth({
     signIn:"/signin",
     signOut : "/",
   },
-  secret:"secret",
+  
   database:process.env.MONGODB_URI,
+
+  session:{
+    strategy:"jwt"
+  }
   
 });
 

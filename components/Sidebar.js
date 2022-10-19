@@ -7,9 +7,9 @@ function Sidebar() {
     const { data: session } = useSession();
 
     return (
-        <div className="space-y-2   p-2 my-5 z-0 ">
+        <div className="space-y-2 p-2 my-5 z-0 ">
             {/* Top */}
-            <div className="rounded-3xl overflow-hidden shadow-xl   my-3 bg-[#00d8ff]">
+            <div className="rounded-3xl overflow-hidden shadow-xl h-[600px]     my-3 bg-[#00d8ff] ">
                 <img src="https://i.imgur.com/dYcYQ7E.png" className="w-full" />
                 <div className="flex justify-center -mt-8">
                     <img src={session?.user?.image} className="rounded-full border-solid border-white border-2 -mt-3 w-32" />

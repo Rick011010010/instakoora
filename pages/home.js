@@ -12,7 +12,7 @@ import Navbar from "../components/Navbar";
 
 
 
-function home({players}) {
+function home({ players }) {
 
   const { data: session, status } = useSession();
   console.log(session)
@@ -23,17 +23,17 @@ function home({players}) {
     setMenu(!menu)
   }
 
-  if (  session) {
-
-    return (
-      <div className=" bg-[#000300]   ">
-
-        <div className=" bg-[#000300] z-50 ">
 
 
-          <Navbar/>
+  return (
+    <div className=" bg-[#000300]   ">
 
-          {/* <div className='md:flex md:justify-between hidden  '>
+      <div className=" bg-[#000300] z-50 ">
+
+
+        <Navbar />
+
+        {/* <div className='md:flex md:justify-between hidden  '>
 
             <div className='w-[100%] bg-[#000300]  p-3 md:flex md:justify-between '>
               <h1 className='text-[#00df9a] text-4xl p-1'>InstaKoora</h1>
@@ -56,41 +56,31 @@ function home({players}) {
             <button className=' flex text-[#00df9a] '><AiFillSetting size={25} /><li className=" ">Settings</li></button>
             <button className=' flex  text-[#00df9a]' onClick={() => signOut()}><BsFillPersonFill size={25} /><li className="">Signe Out</li></button>
           </ul> */}
-        </div>
-
-
-
-        <div className="md:grid md:grid-cols-3 xl:grid xl:grid-cols-4    ">
-
-          <Sidebar />
-
-
-
-          <div className=" w-[100%]   xl:col-span-3 md:col-span-2   ">
-            <MainProfil players={players}/>
-          </div>
-        </div>
-
-
-
-
-
-
-
       </div>
 
-    )
 
-  } else {
-    return (
-      <div>
-        <p>You are not signed in.</p>
-        <button onClick={() => signIn()}>Sign in</button>
 
+      <div className="md:grid md:grid-cols-3 xl:grid xl:grid-cols-4    ">
+
+        <Sidebar />
+
+
+
+        <div className=" w-[100%]   xl:col-span-3 md:col-span-2   ">
+          <MainProfil players={players} />
+        </div>
       </div>
 
-    )
-  }
+
+
+
+
+
+
+    </div>
+
+  )
+
 }
 
 export default home
@@ -110,14 +100,14 @@ export const getServerSideProps = async (context) => {
   }
 
 
-  
+
 
 
   // Get players on SSR
   const { db } = await connectToDatabase();
   const players = await db
     .collection("players")
-    .find({email:session.user.email})
+    .find({ email: session.user.email })
     .sort({ timestamp: -1 })
     .toArray();
 

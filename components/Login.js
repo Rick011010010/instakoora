@@ -64,7 +64,7 @@ function Login() {
                 <div class="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
 
                     <div class="flex justify-center self-center absolute top-10 h-[500px] md:w-[400px]   z-0 bg-gradient-to-b   inset-0">
-                        <div class="p-12 bg-white mx-auto opacity-70 rounded-2xl  ">
+                        <div class="p-12 bg-white mx-auto opacity-50 rounded-2xl  ">
                             <div class="mb-4">
                                 <h3 class="font-semibold text-2xl text-gray-800">Sign In </h3>
                                 <p class="text-gray-500">Please sign in to your account.</p>
