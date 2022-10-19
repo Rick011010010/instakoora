@@ -63,8 +63,8 @@ export default NextAuth({
 
   session:{
     strategy:"jwt"
-  }
-  
+  },
+  debug: process.env.NODE_ENV !== "production",
 });
 
 // const signInUser = async ({password, user})=>{
