@@ -88,8 +88,16 @@ export default home
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context)
- 
-  
+  if (!session) {
+
+    return {
+      redirect: {
+        destination: '/'
+      }
+
+    }
+
+  }
   // Get players on SSR
   const { db } = await connectToDatabase();
   const players = await db
