@@ -301,7 +301,7 @@ export default function MainProfil({ players }) {
 
 
   console.log(myteam, "ggggggggggggggggggggggggggggggggggggggg ")
-  console.log(teams, "cccccccccccccccccccccccc ")
+  console.log(teams, "cccccccccccccccccccccccc")
 
   const [URL, setUrl] = useState('')
 
