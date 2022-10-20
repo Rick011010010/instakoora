@@ -47,6 +47,11 @@ export default function MapLocation() {
             center: center,
             zoom: 15
         })
+        const marker = new mapboxgl.Marker({
+            color: "#FFFFFF",
+            draggable: true
+            }).setLngLat([30.5, 50.5])
+            .addTo(map);
     }
 
 
@@ -81,8 +86,13 @@ export default function MapLocation() {
         }
         const nav = new mapboxgl.NavigationControl()
         
+        
 
     });
+
+
+    
+        
 
 
     // //   /**
