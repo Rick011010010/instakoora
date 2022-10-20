@@ -43,7 +43,7 @@ function Team({ team,teamupdate,setTeamupdate
       <img src={team.photoUrl || team.URL } alt="" className=' absolute self-center top-24 w-[435px] left-4 h-[300px] rounded-lg shadow-2xl shadow-[#00E1C8] border-[#00E1C8] border-8 ' />
 
 
-      <div className='absolute w-full top-16 text-center -px-2'>
+      <div className='absolute w-full top-16 text-center px-2'>
         <div className=' text-3xl font-bold '><h1>{team.teamName}</h1></div>
 
       </div>
