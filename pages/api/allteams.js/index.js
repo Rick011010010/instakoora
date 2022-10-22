@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     try {
       const teams = await db
         .collection("teams")
-        .find()
+        .find({})
         .sort({ timestamp: -1 })
         .toArray();
       res.status(200).json(teams);
