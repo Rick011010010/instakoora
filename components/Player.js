@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import { useSSRPlayerState, handlePlayerState } from '../atoms/playerAtom'
 import { useRecoilState } from "recoil";
 
-function player({player,setPlayerDelete, playerDelete}) {
+function player({player,setPlayerDelete, playerDelete, setModal, modal}) {
 
   const [handlePlayer, setHandlePlayer] = useRecoilState(handlePlayerState);
 
@@ -16,6 +16,8 @@ function player({player,setPlayerDelete, playerDelete}) {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
+
+    setModal(!modal)
 
 
     setHandlePlayer(true)

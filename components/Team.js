@@ -129,7 +129,7 @@ function Team({ team,teamupdate,setTeamupdate
       </div>
 
 
-      <button onClick={()=>updateMyTeam()}>update</button>
+      
 
 
 

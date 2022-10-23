@@ -9,10 +9,11 @@ import { AiFillSetting } from 'react-icons/ai'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { TiThMenu } from 'react-icons/ti'
 import Navbar from "../components/Navbar";
+import { GiVikingLonghouse } from "react-icons/gi";
 
 
 
-function home({ players }) {
+function home({ players, articles }) {
 
   const { data: session, status } = useSession();
   console.log(session)
@@ -62,12 +63,12 @@ function home({ players }) {
 
       <div className="md:grid md:grid-cols-3 xl:grid xl:grid-cols-4    ">
 
-        <Sidebar />
+        <Sidebar articles={articles}/>
 
 
 
         <div className=" w-[100%]   xl:col-span-3 md:col-span-2   ">
-          <MainProfil players={players} />
+          <MainProfil players={players} articles={articles} />
         </div>
       </div>
 
@@ -88,7 +89,16 @@ export default home
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context)
+
+    // Get Google News API
+    const results = await fetch(
+      `https://newsapi.org/v2/top-headlines?country=ma&apiKey=${process.env.NEWS_API_KEY}`
+    ).then((res) => res.json());
+    console.log(results)
+    
+
   
+
   // Get players on SSR
   const { db } = await connectToDatabase();
   const players = await db
@@ -100,6 +110,7 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       session,
+      articles: results.articles,
       players: players.map((player) => ({
         _id: player._id.toString(),
         inputName: player.inputName,

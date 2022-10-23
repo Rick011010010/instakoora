@@ -219,7 +219,7 @@ export default function MainProfil({ players }) {
     };
 
     fetchPLayers();
-  }, [modal, playerDelete]);
+  }, [modal]);
 
 
 
@@ -337,7 +337,7 @@ export default function MainProfil({ players }) {
                     {useSSRPlayers ?
                       realplayers.map((player) => (
 
-                        <Player player={player} key={player._id} playerDelete={playerDelete} setPlayerDelete={setPlayerDelete} />
+                        <Player player={player} key={player._id} playerDelete={playerDelete} setPlayerDelete={setPlayerDelete} setModal={setModal} modal={modal} />
 
                       ))
                       : players.map((player) => (
@@ -463,7 +463,7 @@ export default function MainProfil({ players }) {
                         type="number"
                         name="guest"
                         id="guest"
-                        placeholder="5"
+                        placeholder="enter the number of players"
                         min="0"
                         className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         value={playersNumber}
@@ -480,7 +480,7 @@ export default function MainProfil({ players }) {
                         type="number"
                         name="guest"
                         id="guest"
-                        placeholder="5"
+                        placeholder="06**"
                         min="0"
                         className="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                         value={teamPhone}
