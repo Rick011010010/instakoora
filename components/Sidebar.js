@@ -61,11 +61,11 @@ function Sidebar({ articles }) {
 
 
             {/* Bottom */}
-            <div className="hidden md:flex bg-gray-200 text-black/70 rounded-lg overflow-hidden flex-col space-y-2 pt-2.5 h-96 sticky top-20 border border-gray-300 ">
+            <div className="hidden md:flex bg-white text-black/70 rounded-lg overflow-hidden flex-col space-y-2 pt-2.5 h-96 sticky top-20 border border-gray-300 ">
                 <div className=" ">
                     <div className="flex items-center justify-between font-bold px-2.5 pb-4">
-                        <h4>InstaKoora News</h4>
-                        <BsNewspaper className="h-5 w-5" />
+                        <h4 className=" text-xl font-bold">InstaKoora News</h4>
+                        <BsFillInfoCircleFill className="h-5 w-5 " />
                     </div>
 
 
