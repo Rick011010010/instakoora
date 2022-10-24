@@ -10,47 +10,7 @@ import Image from 'next/image'
 function Team({ team,teamupdate,setTeamupdate
  }) {
 
-  const updateMyTeam = async () => {
-
-    const response = await fetch(`/api/teams/${team._id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body:JSON.stringify(team)
-    },
-    
-    ).then((result) => {
-      result.json().then((resp) => {
-        console.warn(resp)
-        
-      })
-    });
-
-
-    setTeamupdate(!teamupdate)
-
-    
-
-  }
-
-
-
-  const deleteteam = async () => {
-
-    const response = await fetch(`/api/teams/${team._id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
-
-    
-
-    setTeamupdate(!teamupdate)
-   
-
-    
-    
-  }
-
-
+ 
 
 
 
@@ -150,7 +110,7 @@ function Team({ team,teamupdate,setTeamupdate
         </div>
       </div>
 
-      <button className=' absolute right-5 top-[540px] ml-[10%] hover:bg-gray-400 rounded-2xl ' onClick={deleteteam}><RiDeleteBin6Line color='white' size={20} /></button>
+      
 
 
       

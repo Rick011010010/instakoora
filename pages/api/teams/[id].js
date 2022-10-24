@@ -18,4 +18,14 @@ export default async function handler(req, res) {
       res.status(500).json(error);
     }
   }
+
+
+  if (method === "DELETE") {
+    try {
+      await db.collection("teams").deleteOne({ _id: new ObjectId(id) });
+      res.status(200).json({ message: "The team has been deleted!!" });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
 } 

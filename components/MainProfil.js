@@ -18,6 +18,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import axios from 'axios';
 import MapLocation from './MapLocation'
+import AllTeams from './AllTeams'
 
 
 
@@ -637,7 +638,7 @@ export default function MainProfil({ players }) {
             modules={[Autoplay, Pagination, Navigation]}
             className="  h-[690px] w-[100%]  rounded-2xl my-2 relative  "
           >
-            {teams.map((team) => (<SwiperSlide><Team team={team} /></SwiperSlide>))}
+            {teams.map((team) => (<SwiperSlide><AllTeams team={team} /></SwiperSlide>))}
 
           </Swiper>
         </div>
