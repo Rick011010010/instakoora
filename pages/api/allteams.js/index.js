@@ -11,6 +11,7 @@ export default async function handler(req, res) {
   const { db } = await connectToDatabase();
 
   if (method === "GET") {
+    const user=query.user
     
     try {
       const teams = await db

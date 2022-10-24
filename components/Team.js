@@ -40,7 +40,7 @@ function Team({ team,teamupdate,setTeamupdate
       <img src="/cardfifa123.png"
         className=' w-[500px] h-[650px] z-50 ' />
 
-      <img src={team.photoUrl || team.URL } alt="" className=' absolute self-center top-24 w-[435px] left-4 h-[300px] rounded-lg shadow-2xl shadow-[#00E1C8] border-[#00E1C8] border-8 ' />
+      <img src={team.photoUrl || team.URL } alt="" className=' absolute self-center top-24 md:w-[435px] w-[317px] left-4 h-[300px] rounded-lg shadow-2xl shadow-[#00E1C8] border-[#00E1C8] border-8 ' />
 
 
       <div className='absolute w-full top-12 text-center px-2'>
@@ -75,8 +75,9 @@ function Team({ team,teamupdate,setTeamupdate
               <BsCalendarDateFill/>
             </div>
             <div class="flex flex-col justify-center">
-              <div class="text-sm text-gray-400 font-bold">We Want To Play On:</div>
-              <div class="text-lg font-bold"><p>{team.date}, <BiTime size={20} className=" inline"/>{team.hour}</p> </div>
+              <div class="hidden md:flex text-sm text-gray-400 font-bold">We Want To Play On:</div>
+              <div class="md:hidden text-sm text-gray-400 font-bold">Available On:</div>
+              <div class="text-lg font-bold"><p>{team.date},<br className=' md:hidden'/> <BiTime size={20} className=" inline"/>{team.hour}</p> </div>
 
             </div>
           </div>
@@ -89,14 +90,15 @@ function Team({ team,teamupdate,setTeamupdate
       </div> */}
 
 
-      <div class="absolute left-[245px] top-[490px] h-10">
+      <div class="absolute md:left-[245px] left-[183px] md:top-[490px] top-[510px] h-10">
         <div class="widget w-full px-1 rounded-lg bg-transparant border-l-4 border-white">
           <div class="flex items-center">
             <div class="icon w-6 p-1 bg-white text-purple-900 rounded-full mr-3">
               <HiUserGroup/>
             </div>
             <div class="flex flex-col justify-center">
-              <div class="text-sm text-gray-400 font-bold">Membres of the team:</div>
+              <div class="hidden md:flex text-sm text-gray-400 font-bold">Membres of the team:</div>
+              <div class="md:hidden text-sm text-gray-400 font-bold">Membres :</div>
               <div class="text-xl font-bold"><p>{team.playersNumber}</p> </div>
 
             </div>
@@ -113,14 +115,15 @@ function Team({ team,teamupdate,setTeamupdate
       </div> */}
 
 
-      <div class="absolute left-[245px] top-[420px] h-10">
+      <div class="absolute md:left-[245px] left-[183px] top-[420px] h-10">
         <div class="widget w-full px-1 rounded-lg bg-transparant border-l-4 border-white">
           <div class="flex items-center">
             <div class="icon w-6 p-1 bg-white text-purple-900 rounded-full mr-3">
               <GiTeamDowngrade/>
             </div>
             <div class="flex flex-col justify-center">
-              <div class="text-sm text-gray-400 font-bold">The Team Group Age :</div>
+              <div class=" hidden md:flex text-sm text-gray-400 font-bold">The Team Group Age :</div>
+              <div class="md:hidden text-sm text-gray-400 font-bold">Age :</div>
               <div class="text-xl font-bold"><p>{team.groupAge}</p> </div>
 
             </div>

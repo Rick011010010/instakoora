@@ -21,7 +21,7 @@ const Home = () => {
 
       <Head>
         <title>InstaKoora</title>
-        <link rel="icon" href="/LOGO INSTA KOORA.png" />
+        <link rel="icon" href="/LOGO INSSSSS.png" />
         <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@1,800&display=swap" rel="stylesheet"></link>
         <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet"></link>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet"></link>
