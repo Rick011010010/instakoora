@@ -23,7 +23,7 @@ function Sidebar({ articles }) {
                 </div>
                 <div className="text-center px-3 pb-6 pt-2">
                     <h3 className="text-black text-sm bold font-sans">Welcome,  {session?.user?.name}</h3>
-                    <p className="mt-2 font-sans font-light text-black">Hello, i'm from another the other side!</p>
+                    <p className="mt-2 font-sans font-light text-black">Hello, Be ready to create your team!</p>
                 </div>
                 <div className=" px-6">
                     <div className="flex items-center mt-4 text-gray-700">
