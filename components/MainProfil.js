@@ -311,7 +311,7 @@ export default function MainProfil({ players }) {
     const form = new FormData();
     form.append("file", e);
     form.append("upload_preset", "my-uploads");
-    console.log(e,"255255415255545");
+    console.log(e, "255255415255545");
     axios.post("https://api.cloudinary.com/v1_1/dzdse786p/image/upload", form)
       .then((result) => setUrl(result.data.secure_url))
     addTeamDb()
@@ -545,7 +545,11 @@ export default function MainProfil({ players }) {
                         </select>
                       </div>
                     </div>
+                    <label className="mb-3 block text-base font-medium text-[#07074D]">
+                      Add Your Team Image
+                    </label>
                     <div className=" flex flex-row border ">
+
                       <input
                         type="text"
                         placeholder="Add a photo Team URL "
@@ -554,14 +558,14 @@ export default function MainProfil({ players }) {
                         onChange={photoUrlHandler}
                       />
                       <div className=" w-32 flex flex-col justify-center items-center ">
-                       
+
                         <input
                           onChange={(e) => uploadImagePdf(e.target.files[0])}
                           id="dropzone-file"
                           type="file"
                           className=" rounded-full w-28 border-2 "
                           multiple
-                          
+
                         /></div>
                     </div>
 
@@ -589,7 +593,7 @@ export default function MainProfil({ players }) {
 
       <div className=" w-[100%] h-[400px]  border text-left rounded-2xl py-5 px-8 my-60 md:my-5 relative">
         <h3 className="text-center">Map Position</h3>
-        <MapLocation/>
+        <MapLocation />
       </div>
 
 
