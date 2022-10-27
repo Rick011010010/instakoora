@@ -592,7 +592,7 @@ export default function MainProfil({ players }) {
 
 
       <div className=" w-[100%] h-[400px]  border text-left rounded-2xl py-5 px-8 my-60 md:my-5 relative">
-        <h3 className="text-center">Map Position</h3>
+        
         <MapLocation />
       </div>
 

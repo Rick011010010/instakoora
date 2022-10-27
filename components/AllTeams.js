@@ -10,9 +10,6 @@ import Image from 'next/image'
 function Team({ team,teamupdate,setTeamupdate
  }) {
 
- 
-
-
 
   return (
     <div className=' text-white h-[600px] 2xl:w-[470px] relative    '>
