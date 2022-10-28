@@ -1,16 +1,39 @@
-
 import Image from "next/image";
-import {BsFillInfoCircleFill, BsNewspaper} from 'react-icons/bs';
+import { BsFillInfoCircleFill, BsNewspaper } from 'react-icons/bs';
 import TimeAgo from "timeago-react";
-
-
-
-
-
-
+import { useState, useEffect } from 'react'
 import { signOut, useSession } from "next-auth/react";
 
+
+
 function Sidebar({ articles }) {
+
+    const [position, setPosition] = useState([])
+    console.log(position[0].localisation,"sssssssssssssssssssss")
+
+    
+
+    useEffect(() => {
+        const fetchposition = async () => {
+            const response = await fetch("/api/position?user=" + session.user.email, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            });
+
+            const responseData = await response.json();
+            setPosition(responseData);
+
+
+        };
+
+        fetchposition();
+    }, []);
+
+
+
+
+
+
     const { data: session } = useSession();
 
     return (
@@ -36,7 +59,7 @@ function Sidebar({ articles }) {
                         <svg className="h-6 w-6 fill-current" viewBox="0 0 512 512">
                             <path d="M256 32c-88.004 0-160 70.557-160 156.801C96 306.4 256 480 256 480s160-173.6 160-291.199C416 102.557 344.004 32 256 32zm0 212.801c-31.996 0-57.144-24.645-57.144-56 0-31.357 25.147-56 57.144-56s57.144 24.643 57.144 56c0 31.355-25.148 56-57.144 56z" />
                         </svg>
-                        <h1 className="px-2 text-sm">Morocco</h1>
+                        <h1 className="px-2 text-sm">{position[0].localisation}</h1>
                     </div>
                     <div className="flex items-center mt-4 text-gray-700">
                         <svg className="h-6 w-6 fill-current" viewBox="0 0 512 512">
@@ -73,24 +96,24 @@ function Sidebar({ articles }) {
                     <div className="space-y-1" >
                         {articles.slice(0, 6).map((article) => (
                             <a href={article.url}>
-                            <div
-                                key={article.url}
-                                className="flex space-x-2 items-center cursor-pointer hover:bg-black/10  px-2.5 py-1"
-                                
-                                
-                            >
-                                
-                                <div><img src={article.urlToImage} alt="" className=" w-10 h-10"/></div>
-                                <div>
-                                    <h5 className="max-w-xs font-medium text-sm truncate pr-10">
-                                        {article.title}
-                                    </h5>
-                                    <TimeAgo
-                                        datetime={article.publishedAt}
-                                        className="text-xs mt-0.5 dark:text-white/75 opacity-80"
-                                    />
+                                <div
+                                    key={article.url}
+                                    className="flex space-x-2 items-center cursor-pointer hover:bg-black/10  px-2.5 py-1"
+
+
+                                >
+
+                                    <div><img src={article.urlToImage} alt="" className=" w-10 h-10" /></div>
+                                    <div>
+                                        <h5 className="max-w-xs font-medium text-sm truncate pr-10">
+                                            {article.title}
+                                        </h5>
+                                        <TimeAgo
+                                            datetime={article.publishedAt}
+                                            className="text-xs mt-0.5 dark:text-white/75 opacity-80"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
                             </a>
                         ))}
                     </div>

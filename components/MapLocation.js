@@ -2,8 +2,14 @@ import { useMemo } from "react";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import { useState, useEffect } from 'react'
 import { GiCogLock } from "react-icons/gi";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Home() {
+
+
+
+
+
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     });
@@ -15,10 +21,13 @@ export default function Home() {
 function Map() {
     const [posLat, setPosLat] = useState(0)
     const [posLong, setPosLong] = useState(0)
-    const [position, setPosition] = useState(0)
+    const [Position, setPosition] = useState([])
     console.log(posLat, "hhhhhhfhfhhfhf")
     console.log(posLong, "mmmmmmmmmmm")
-    console.log(position, "position")
+    console.log(Position, "Position1")
+    const { data: session } = useSession();
+
+
 
 
     useEffect(() => {
@@ -28,29 +37,92 @@ function Map() {
 
             setPosLat(position.coords.latitude)
             setPosLong(position.coords.longitude)
-            setPosition(position)
+
 
         });
 
 
 
     }, [])
-    const google_map_pos = new google.maps.LatLng(posLat, posLong);
-    console.log(google_map_pos, "google_map_position")
-    var google_maps_geocoder = new google.maps.Geocoder();
-    google_maps_geocoder.geocode(
-        { 'latLng': google_map_pos },
-        function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK && results[0]) {
-                console.log(results[0].formatted_address);
+
+    useEffect(() => {
+
+        const google_map_pos = new google.maps.LatLng(posLat, posLong);
+
+        console.log(google_map_pos, "google_map_position")
+
+        var google_maps_geocoder = new google.maps.Geocoder();
+
+        google_maps_geocoder.geocode(
+            { 'latLng': google_map_pos },
+
+
+            function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK && results[2]) {
+                    console.log(results[2].formatted_address);
+
+                    setPosition(results[2].formatted_address)
+                }
+
+
             }
-            console.log(results, "results");
-        }
-    );
+
+
+
+
+        );
+
+    })
+
+
     const center = ({ lat: posLat, lng: posLong })
 
+
+
+    const addPosition = async (e) => {
+        e.preventDefault();
+
+        const response = await fetch("/api/position", {
+
+            method: "Post",
+            body: JSON.stringify({
+
+                localisation: Position,
+                username: session.user.name,
+                email: session.user.email,
+                createdAt: new Date().toString(),
+
+
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+
+
+        })
+        const responseData = await response.json();
+
+
+        console.log(responseData, '123');
+
+        
+
+
+    }
+
+    
+
+
+
+
+
+
+
+
     return (
+
         <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
+            <button className=" absolute bg-black bottom-0 left-20" onClick={addPosition}>use this current </button>
             <MarkerF position={center} />
         </GoogleMap>
     );
