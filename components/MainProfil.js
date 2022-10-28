@@ -240,6 +240,7 @@ export default function MainProfil({ players }) {
         teamPhone: teamPhone,
         date: date,
         hour: hour,
+        position:position[0]?.localisation,
         groupAge: groupAge,
         photoUrl: photoUrl,
         URL: URL,
@@ -318,9 +319,30 @@ export default function MainProfil({ players }) {
   };
 
 
+
+  const [position, setPosition] = useState([])
+
+
+  useEffect(() => {
+    const fetchposition = async () => {
+      const response = await fetch("/api/position?user=" + session.user.email, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const responseData = await response.json();
+      setPosition(responseData);
+
+
+    };
+
+    fetchposition();
+  }, []);
+
+
   return (
     <div className=" md:flex md:flex-col md:gap-3 justify-between  bg-[#000300] text-white my-8 z-0   ">
-      <div className=" w-[100%]   xl:h-[750px] bg-[#000300] rounded-2xl  p-3 h-[2050px] pt-5 box-border ">
+      <div className=" w-[100%]   xl:h-[780px] bg-[#000300] rounded-2xl  p-3 h-[2050px] pt-5 box-border ">
 
         <h3 className="text-center my-5">Create a Team</h3>
         <div className=" w-full h-96 grid sm:grid-cols-1 xl:grid-cols-3 gap-4">
@@ -568,16 +590,21 @@ export default function MainProfil({ players }) {
 
                         /></div>
                     </div>
+                    
 
-                    <div>
+                    <div className=" flex">
+                    
                       <button
                         className="hover:shadow-form rounded-md bg-[#00E1C8] py-4 px-8 text-center text-base font-semibold text-white outline-none"
                         onClick={addTeamDb}
                       >
                         Submit
                       </button>
+                      <p className="text-black font-medium px-2 py-2">PS:Add Your position From the Map</p>
+                      
                     </div>
                   </form>
+                  
                 </div>
               </div>
             </div>

@@ -3,6 +3,7 @@ import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 import { useState, useEffect } from 'react'
 import { GiCogLock } from "react-icons/gi";
 import { signOut, useSession } from "next-auth/react";
+import { IoMdLocate } from 'react-icons/io'
 
 export default function Home() {
 
@@ -44,6 +45,8 @@ function Map() {
 
 
     }, [])
+
+    
 
     useEffect(() => {
 
@@ -122,7 +125,7 @@ function Map() {
     return (
 
         <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
-            <button className=" absolute bg-black bottom-0 left-20" onClick={addPosition}>use this current </button>
+            <button className="  absolute rounded-full py-2 mx-3 px-3 shadow-ms hover:shadow-xl active:scale-90 transition duration-150 bg-black bottom-0 left-20 flex" onClick={addPosition}><IoMdLocate size={20}/>use this current position </button>
             <MarkerF position={center} />
         </GoogleMap>
     );

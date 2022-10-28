@@ -1,14 +1,38 @@
 import React from 'react'
 import { BsFillTelephoneFill, BsCalendarDateFill } from 'react-icons/bs'
-import { GiTeamDowngrade  } from 'react-icons/gi'
-import { HiUserGroup   } from 'react-icons/hi'
-import {  BiTime  } from 'react-icons/bi'
+import { GiTeamDowngrade } from 'react-icons/gi'
+import { HiUserGroup } from 'react-icons/hi'
+import { BiTime } from 'react-icons/bi'
 import { RiDeleteBin6Line, RiTeamFill } from 'react-icons/ri'
+import { MdLocationPin } from 'react-icons/md'
+import { useState, useEffect } from 'react'
+import { signOut, useSession } from "next-auth/react";
 
 import Image from 'next/image'
 
-function Team({ team,teamupdate,setTeamupdate
- }) {
+function Team({ team, teamupdate, setTeamupdate
+}) {
+
+  const { data: session } = useSession();
+
+  const [position, setPosition] = useState([])
+
+
+  useEffect(() => {
+    const fetchposition = async () => {
+      const response = await fetch("/api/position?user=" + session.user.email, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const responseData = await response.json();
+      setPosition(responseData);
+
+
+    };
+
+    fetchposition();
+  }, []);
 
 
   return (
@@ -16,11 +40,11 @@ function Team({ team,teamupdate,setTeamupdate
       <img src="/cardfifa123.png"
         className=' w-[500px] h-[650px] z-50 ' />
 
-      <img src={team.photoUrl || team.URL } alt="" className=' absolute self-center top-24 md:w-[435px] w-[317px] left-4 h-[300px] rounded-lg shadow-2xl shadow-[#00E1C8] border-[#00E1C8] border-8 ' />
+      <img src={team.photoUrl || team.URL} alt="" className=' absolute self-center top-24 md:w-[435px] w-[317px] left-4 h-[300px] rounded-lg shadow-2xl shadow-[#00E1C8] border-[#00E1C8] border-8 ' />
 
 
       <div className='absolute w-full top-16 text-center px-2'>
-        <div><h1  className=' text-3xl font-bold '>{team.teamName}</h1></div>
+        <div><h1 className=' text-3xl font-bold '>{team.teamName}</h1></div>
 
       </div>
 
@@ -28,7 +52,7 @@ function Team({ team,teamupdate,setTeamupdate
         <div class="widget w-full px-1 rounded-lg bg-transparant border-l-4 border-white">
           <div class="flex items-center">
             <div class="icon w-6 p-1 bg-white text-purple-900 rounded-full mr-3">
-            <BsFillTelephoneFill/>
+              <BsFillTelephoneFill />
             </div>
             <div class="flex flex-col justify-center">
               <div class="text-sm text-gray-400 font-bold">Phone Number:</div>
@@ -48,12 +72,12 @@ function Team({ team,teamupdate,setTeamupdate
         <div class="widget w-full px-0.5 rounded-lg bg-transparant border-l-4 border-white">
           <div class="flex items-center">
             <div class="icon w-6 p-1 bg-white text-purple-900 rounded-full mr-3">
-              <BsCalendarDateFill/>
+              <BsCalendarDateFill />
             </div>
             <div class="flex flex-col justify-center">
               <div class="hidden md:flex text-sm text-gray-400 font-bold">We Want To Play On:</div>
               <div class="md:hidden text-sm text-gray-400 font-bold">Available On:</div>
-              <div class="text-lg font-bold"><p>{team.date},<br className=' md:hidden'/> <BiTime size={20} className=" inline"/>{team.hour}</p> </div>
+              <div class="text-lg font-bold"><p>{team.date},<br className=' md:hidden' /> <BiTime size={20} className=" inline" />{team.hour}</p> </div>
 
             </div>
           </div>
@@ -70,7 +94,7 @@ function Team({ team,teamupdate,setTeamupdate
         <div class="widget w-full px-1 rounded-lg bg-transparant border-l-4 border-white">
           <div class="flex items-center">
             <div class="icon w-6 p-1 bg-white text-purple-900 rounded-full mr-3">
-              <HiUserGroup/>
+              <HiUserGroup />
             </div>
             <div class="flex flex-col justify-center">
               <div class="hidden md:flex text-sm text-gray-400 font-bold">Membres of the team:</div>
@@ -95,7 +119,7 @@ function Team({ team,teamupdate,setTeamupdate
         <div class="widget w-full px-1 rounded-lg bg-transparant border-l-4 border-white">
           <div class="flex items-center">
             <div class="icon w-6 p-1 bg-white text-purple-900 rounded-full mr-3">
-              <GiTeamDowngrade/>
+              <GiTeamDowngrade />
             </div>
             <div class="flex flex-col justify-center">
               <div class=" hidden md:flex text-sm text-gray-400 font-bold">The Team Group Age :</div>
@@ -107,10 +131,17 @@ function Team({ team,teamupdate,setTeamupdate
         </div>
       </div>
 
-      
+      <div className=' absolute top-[558px] left-[100px] flex '>
+        <MdLocationPin size={25} /><h1 className='text-lg font-bold'>{team.position}</h1>
+      </div>
 
 
       
+
+
+
+
+
 
 
 
