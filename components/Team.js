@@ -179,7 +179,7 @@ function Team({ team, teamupdate, setTeamupdate
         <MdLocationPin size={25} /><h1 className='text-lg font-bold'>{position[0]?.localisation}</h1>
       </div>
 
-      <button className=' absolute right-5 top-[540px] ml-[10%] hover:bg-gray-400 rounded-2xl ' onClick={deleteteam}><RiDeleteBin6Line color='white' size={20} /></button>
+      <button className=' absolute right-5 top-[552px] ml-[10%] hover:bg-gray-400 rounded-2xl ' onClick={deleteteam}><RiDeleteBin6Line color='white' size={20} /></button>
 
 
 
