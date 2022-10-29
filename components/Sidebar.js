@@ -32,6 +32,9 @@ function Sidebar({ articles }) {
     }, []);
 
 
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=$casablanca&units=imperial&appid=${process.env.NEXT_PUBLIC_WHEATHER_API_KEY}`;
+
+
 
 
 
@@ -121,6 +124,8 @@ function Sidebar({ articles }) {
                     </div>
                 </div>
             </div>
+
+            
         </div>
     );
 }

@@ -175,7 +175,7 @@ function Team({ team, teamupdate, setTeamupdate
         </div>
       </div>
 
-      <div className=' absolute top-[571px] left-[100px] flex '>
+      <div className=' absolute top-[571px] left-[100px]  flex '>
         <MdLocationPin size={25} /><h1 className='text-lg font-bold'>{position[0]?.localisation}</h1>
       </div>
 
