@@ -3,17 +3,18 @@ import { BsFillInfoCircleFill, BsNewspaper } from 'react-icons/bs';
 import TimeAgo from "timeago-react";
 import { useState, useEffect } from 'react'
 import { signOut, useSession } from "next-auth/react";
+import Wheather from "./Wheather";
 
 
 
 function Sidebar({ articles }) {
 
     const [position, setPosition] = useState([])
-    console.log(position[0]?.localisation,"sssssssssssssssssssss")
+    console.log(position[0]?.localisation, "sssssssssssssssssssss")
 
-    
 
-    
+
+
 
     useEffect(() => {
         const fetchposition = async () => {
@@ -32,7 +33,7 @@ function Sidebar({ articles }) {
     }, []);
 
 
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=$casablanca&units=imperial&appid=${process.env.NEXT_PUBLIC_WHEATHER_API_KEY}`;
+    
 
 
 
@@ -44,7 +45,7 @@ function Sidebar({ articles }) {
     return (
         <div className="space-y-2 p-2 my-5 z-0 ">
             {/* Top */}
-            <div className="rounded-3xl overflow-hidden shadow-xl h-[600px]     my-3 bg-[#00d8ff] ">
+            <div className="rounded-3xl overflow-hidden shadow-xl h-[500px]     my-3 bg-[#00d8ff] ">
                 <img src="https://i.imgur.com/dYcYQ7E.png" className="w-full" />
                 <div className="flex justify-center -mt-8">
                     <img src={session?.user?.image} className="rounded-full border-solid border-white border-2 -mt-3 w-32" />
@@ -89,7 +90,7 @@ function Sidebar({ articles }) {
 
 
             {/* Bottom */}
-            <div className="hidden md:flex bg-white text-black/70 rounded-lg overflow-hidden flex-col space-y-2 pt-2.5 h-96 sticky top-20 border border-gray-300 ">
+            <div className="hidden md:flex bg-white text-black/70 rounded-lg overflow-hidden flex-col space-y-2 pt-2.5 h-96 sticky top-1 border border-gray-300 ">
                 <div className=" ">
                     <div className="flex items-center justify-between font-bold px-2.5 pb-4">
                         <h4 className=" text-xl font-bold">InstaKoora News</h4>
@@ -125,7 +126,12 @@ function Sidebar({ articles }) {
                 </div>
             </div>
 
-            
+            <div className="hidden md:flex bg-white text-black/70 rounded-lg overflow-hidden flex-col space-y-2 pt-2.5 h-[500px] sticky top-[400px] border border-gray-300 ">
+                <Wheather/>
+
+            </div>
+
+
         </div>
     );
 }

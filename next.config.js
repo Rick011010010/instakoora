@@ -1,15 +1,13 @@
- {import('next').NextConfig} 
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
+}
 
-  
-  image:{
-    domains:["/BG TELE.png", "/LOGO INSTA KOORA.png", "/app BG"]
-  },
-  
-
-  
-
- 
+module.exports = {
+  images: {
+    domains: [
+      'images.unsplash.com', 'openweathermap.org'
+    ]
+  }
 }
 
