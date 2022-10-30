@@ -124,7 +124,7 @@ function Map() {
 
     return (
 
-        <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
+        <GoogleMap zoom={14} center={center} mapContainerClassName="map-container">
             <button className="  absolute rounded-full py-2 mx-3 px-3 shadow-ms hover:shadow-xl active:scale-90 transition duration-150 bg-black bottom-0 left-20 flex" onClick={addPosition}><IoMdLocate size={20}/>use this current position </button>
             <MarkerF position={center} />
         </GoogleMap>
