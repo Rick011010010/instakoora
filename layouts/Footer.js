@@ -12,7 +12,7 @@ function Footer() {
     <div className='w-screen mx-auto py-16 px-10  grid lg:grid-cols-3 gap-8 text-gray-300 bg-[#000300]'>
       <div>
         <h1 className='w-full text-3xl font-bold text-[#00df9a]'>InstaKoora.</h1>
-        <p className='py-4'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id odit ullam iste repellat consequatur libero reiciendis, blanditiis accusantium.</p>
+        <p className='py-4'></p>
         <div className='flex justify-between md:w-[75%] my-6'>
           <FaFacebookSquare size={30} />
           <FaInstagram size={30} />

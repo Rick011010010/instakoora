@@ -32,10 +32,10 @@ function Navbar() {
                             <div class="hidden lg:block lg:ml-6">
                                 <div class="flex space-x-4">
                                     {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
-                                    <a href="#" class="bg-gray-900 text-[#2afc5f]  px-3 py-2 rounded-md text-lg font-medium flex"><AiFillHome size={25} />Home</a>
-                                    <a href="#" class="text-[#2afc5f] hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium flex"><HiUserGroup size={25} />Teams</a>
-                                    <a href="#" class="text-[#2afc5f] hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium flex"><GoLocation size={25}/>Position</a>
-                                    <a href="#" class="text-[#2afc5f] hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium flex">Calendar</a>
+                                    <a href="#" class="bg-gray-900 text-[#00d8ff]  px-3 py-2 rounded-md text-lg font-medium flex"><AiFillHome size={25} />Home</a>
+                                    <a href="#" class="text-[#00d8ff] hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium flex"><HiUserGroup size={25} />Teams</a>
+                                    <a href="#" class="text-[#00d8ff] hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium flex"><GoLocation size={25}/>Position</a>
+                                    <a href="#" class="text-[#00d8ff] hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-lg font-medium flex">Calendar</a>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@ function Navbar() {
 
                                     Menu open: "hidden", Menu closed: "block" */}
 
-                                <svg class={!logout?"block h-6 w-6 text-[#2afc5f]":'hidden'} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <svg class={!logout?"block h-6 w-6 text-[#00d8ff]":'hidden'} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                                 </svg>
                                 {/* <!--
@@ -74,14 +74,14 @@ function Navbar() {
 
                                     Menu open: "block", Menu closed: "hidden" */}
 
-                                <svg class={logout?"block h-6 w-6 text-[#2afc5f]":'hidden'} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <svg class={logout?"block h-6 w-6 text-[#00d8ff]":'hidden'} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
                         </div>
                         <div class="hidden lg:block lg:ml-4">
                             <div class="flex items-center">
-                                <button type="button" class="flex-shrink-0 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-[#2afc5f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-[#2afc5f]">
+                                <button type="button" class="flex-shrink-0 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-[#00d8ff] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-[#00d8ff]">
                                     <span class="sr-only">View notifications</span>
                                     {/* <!-- Heroicon name: outline/bell --> */}
                                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -92,7 +92,7 @@ function Navbar() {
                                 {/* <!-- Profile dropdown --> */}
                                 <div class="ml-4 relative flex-shrink-0">
                                     <div>
-                                        <button type="button" class="bg-gray-800 rounded-full flex text-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-[#039427]" id="user-menu-button" aria-expanded="false" aria-haspopup="true" onClick={() => logoutHandler()}>
+                                        <button type="button" class="bg-gray-800 rounded-full flex text-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-[#00d8ff]" id="user-menu-button" aria-expanded="false" aria-haspopup="true" onClick={() => logoutHandler()}>
                                             <span class="sr-only">Open user menu</span>
                                             <img class="h-8 w-8 rounded-full" src={session?.user?.image} alt="" />
                                         </button>
@@ -108,9 +108,9 @@ function Navbar() {
                                         From: "transform opacity-100 scale-100"
                                         To: "transform opacity-0 scale-95" */}
 
-                                    <div class={logout ? "origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-[#2afc5f] ring-1 ring-black ring-opacity-5 focus:outline-none" : "hidden"} role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                                    <div class={logout ? "origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-[#00d8ff] ring-1 ring-black ring-opacity-5 focus:outline-none" : "hidden"} role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                         {/* <!-- Active: "bg-gray-100", Not Active: "" --> */}
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 active:text-[#2afc5f] " role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 active:text-[#00d8ff] " role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
                                         <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
                                         <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2" onClick={() => signOut()}>Sign out</a>
                                     </div>
@@ -124,10 +124,10 @@ function Navbar() {
                 <div class={logout ?"lg:hidden":"hidden"} id="mobile-menu">
                     <div class="px-2 pt-2 pb-3 space-y-1">
                         {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
-                        <a href="#" class="bg-gray-900 text-[#2afc5f] block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-                        <a href="#" class="text-[#2afc5f] hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
-                        <a href="#" class="text-[#2afc5f] hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Position</a>
-                        <a href="#" class="text-[#2afc5f] hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
+                        <a href="#" class="bg-gray-900 text-[#00d8ff] block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
+                        <a href="#" class="text-[#00d8ff] hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
+                        <a href="#" class="text-[#00d8ff] hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Position</a>
+                        <a href="#" class="text-[#00d8ff] hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
                     </div>
                     <div class="pt-4 pb-3 border-t border-gray-700">
                         <div class="flex items-center px-5">
@@ -138,7 +138,7 @@ function Navbar() {
                                 <div class="text-base font-medium text-white">{session?.user?.name}</div>
                                 <div class="text-sm font-medium text-gray-400">{session?.user?.email}</div>
                             </div>
-                            <button type="button" class="ml-auto flex-shrink-0 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-[#2afc5f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-[#2afc5f]">
+                            <button type="button" class="ml-auto flex-shrink-0 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-[#00d8ff] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-[#00d8ff]">
                                 <span class="sr-only">View notifications</span>
                                 {/* <!-- Heroicon name: outline/bell --> */}
                                 <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

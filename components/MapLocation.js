@@ -83,7 +83,7 @@ function Map() {
 
 
     const addPosition = async (e) => {
-        e.preventDefault();
+       
 
         const response = await fetch("/api/position", {
 
