@@ -58,7 +58,7 @@ function Login() {
     return (
 
 
-        <div className='hidden md:flex md:mr-16 md:top-20 md:absolute w-[100px] h-64 top-56 md:right-0    md:w-[30%]    md:rounded-2xl    '>
+        <div className='hidden md:flex md:mr-16 md:top-50 md:absolute w-[100px] h-64 top-56 md:right-0    md:w-[30%]    md:rounded-2xl    '>
             {/* <!-- component --> */}
             <div class="bg-no-repeat bg-cover bg-center  " >
                 <div class="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
